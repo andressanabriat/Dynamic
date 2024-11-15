@@ -6,13 +6,13 @@ import '../widgets/custom_text_field.dart';
 import 'package:provider/provider.dart';
 import '/src/routes/app_routes.dart';
 
-class RecoverPasswordScreen extends StatelessWidget {
+class PriorSignUpScreen extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
 
     return Scaffold(      
-     body: SingleChildScrollView( // scroll
+      body: SingleChildScrollView( // scroll
         child: Padding(
           padding: const EdgeInsets.fromLTRB(30.0, 24.0, 30.0, 24.0), // Espacio de widget parte izquierda, superior, derecha e inferior
           child: Column(
@@ -35,46 +35,32 @@ class RecoverPasswordScreen extends StatelessWidget {
               SizedBox(height: 250), // Espacio ente botón atras y Restablecer contraseña
               
               Padding(
-                padding: const EdgeInsets.only(right: 6), // Espacio desde el borde izquierdo
+                padding: const EdgeInsets.only(right: 63), // Espacio desde el borde izquierdo
                 child: Text(
-                  'Restablecer Contraseña',
+                  '¿Comenzamos?',
                   style: TextStyle(
-                    fontSize: 32,
+                    fontSize: 40,
                     color: AppColors.mainBlue,
                   ),
                 ),
               ),
-                
+      
               SizedBox(height: 30), // Restablecer contraseña y texto
 
               Text(
-                'Introdcue tu correo y te enviaremos instrucciones para restablecer tu contraseña.',
+                'Primero, necesito saber un poco sobre ti. Esta información ayudará a crear una experiencia personalizada para cumplir tus objetivos.',
                 style: TextStyle(
                   fontSize: 18,
                   color: AppColors.primary,
                 ),
               ),
 
-              SizedBox(height: 30), // Espacio entre texto y Correo electronico
-
-              CustomTextField( // Campo de correo electronico
-                hintText: 'Correo Electrónico',
-                width: 355,  // Ancho del campo
-                height: 55,  // Alto del campo
-                hintStyle: TextStyle(
-                  fontSize: 17, // Tamaño del texto
-                  color: Color.fromARGB(255, 108, 97, 97), // Pendiente de cambiar
-                ),
-                fillColor: Color.fromARGB(128, 186, 178, 178),  // Pendiente de cambiar
-                contentPadding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 25.0),  // Espaciado interno
-              ),
-
-              SizedBox(height: 250), // Espacio entre Correo electronico y boton enviar
+              SizedBox(height: 298), // Espacio entre texto y Correo electronico
 
               CustomButton( // Botón de enviar
-                text: 'Enviar',
+                text: 'Comenzar',
                 onPressed: () {
-                  //Navigator.pushNamed(context, AppRoutes.); // Navegación 
+                  Navigator.pushNamed(context, AppRoutes.signUp); // Navegación 
                 },
                 backgroundColor: AppColors.mainBlue, // Color del botón
                 textColor: AppColors.secondary, // Color de texto

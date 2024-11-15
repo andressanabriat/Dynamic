@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
-import '../views/screens/user_filter_screen.dart';
-import '../views/screens/login_screen.dart';
-import '../views/screens/sports_centers_screen.dart';
 import '../views/screens/home_screen.dart';
+import '../views/screens/login_screen.dart';
 import '../views/screens/recover_password_screen.dart';
+import '../views/screens/prior_sign_up_screen.dart';
+import '../views/screens/sign_up_screen.dart';
+import '../views/screens/sports_centers_screen.dart';
+import '../views/screens/user_filter_screen.dart';
 import 'package:flutter_application_1/src/utils/animations.dart';
 
 class AppRoutes {
   static const String userFilter = '/filter'; 
   static const String sportsCenters = '/centers'; 
   static const String login = '/login';
+  static const String priorSignUp = '/priorSignUp';
+  static const String signUp = '/signUp';
   static const String recoverPassword = '/recover';
   static const String home = '/home';
 
@@ -24,6 +28,10 @@ class AppRoutes {
         return AppAnimations.createSlideTransition(SportsCentersScreen(), backFilter: goingFilter);
       case login:
         return AppAnimations.createSlideTransition(LoginScreen(), backFilter: goingFilter);
+      case priorSignUp:
+        return AppAnimations.createSlideTransition(PriorSignUpScreen(), back: goingBack);
+      case signUp:
+        return AppAnimations.createSlideTransition(SignUpScreen(), back: goingBack);
       case recoverPassword:
         return AppAnimations.createSlideTransition(RecoverPasswordScreen(), back: goingBack);
       case home:
