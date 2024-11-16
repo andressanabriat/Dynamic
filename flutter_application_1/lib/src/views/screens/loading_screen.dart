@@ -25,35 +25,37 @@ class _LoadingScreenState extends State<LoadingScreen> {
   Widget build(BuildContext context) {
     
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.fromLTRB(30.0, 24.0, 30.0, 24.0), // Espacio de widget parte izquierda, superior, derecha e inferior
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start, // Centra los elementos verticalmente
-          children: [
-            SizedBox(height: 380), // Espacio entre parte superior y logo
+      body: SingleChildScrollView( // scroll
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(30.0, 24.0, 30.0, 24.0), // Espacio de widget parte izquierda, superior, derecha e inferior
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start, // Centra los elementos verticalmente
+            children: [
+              SizedBox(height: 380), // Espacio entre parte superior y logo
 
-            Align( // Logo de Dynamic
-              alignment: Alignment.center, // Centra la imagen
-              child: Image.asset(
-                'assets/images/Logos/Logo_Dynamic.png', 
-                width: 100, 
-                height: 100, 
-              ),
-            ),
-
-            SizedBox(height: 250), // Espacio entre el logo y el texto
-
-            Align( // Texto Incia sesión con
-              alignment: Alignment.center,  // Centra el texto
-              child: Text(
-                'Dynamic',
-                style: TextStyle(
-                  fontSize: 40, // Tamaño de fuente de la frase
-                  color: AppColors.primary, // Color de texto
+              Align( // Logo de Dynamic
+                alignment: Alignment.center, // Centra la imagen
+                child: Image.asset(
+                  'assets/images/Logos/Logo_Dynamic.png', 
+                  width: 100, 
+                  height: 100, 
                 ),
               ),
-            ),
-          ],
+
+              SizedBox(height: 250), // Espacio entre el logo y el texto
+
+              Align( // Texto Incia sesión con
+                alignment: Alignment.center,  // Centra el texto
+                child: Text(
+                  'Dynamic',
+                  style: TextStyle(
+                    fontSize: 40, // Tamaño de fuente de la frase
+                    color: AppColors.primary, // Color de texto
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
