@@ -111,7 +111,7 @@ class LoginScreen extends StatelessWidget {
               CustomButton( // Botón de Siguiente
                 text: 'Siguiente',
                 onPressed: () {
-                  //Navigator.pushNamed(context, AppRoutes.); // Navegación 
+                  Navigator.pushNamed(context, AppRoutes.home); // Navegación 
                 },
                 backgroundColor: AppColors.mainBlue, // Color del botón
                 textColor: AppColors.secondary, // Color de texto

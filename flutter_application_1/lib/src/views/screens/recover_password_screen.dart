@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/shared/themes/colors.dart';
-import '../../providers/usuario_provider.dart';
 import '../widgets/custom_button.dart';
 import '../widgets/custom_text_field.dart';
-import 'package:provider/provider.dart';
 import '/src/routes/app_routes.dart';
 
 class RecoverPasswordScreen extends StatelessWidget {

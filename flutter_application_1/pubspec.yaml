@@ -12,6 +12,7 @@ dependencies:
   flutter:
     sdk: flutter
   intl: ^0.18.0
+  flutter_svg: ^1.1.0 
 
   english_words: ^4.0.0
   provider: ^6.0.0
@@ -27,9 +28,12 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/images/Logos/Logo_Google.png
-    - assets/images/Logos/Logo_Apple.png
-    - assets/images/Logos/Logo_Facebook.png
-    - assets/images/Logos/Logo_Microsoft.png
     - assets/images/Logos/Logo_Dynamic.png
+
     - assets/images/Acciones/Icono_Atras.png
+    - assets/images/Acciones/icono_cuadricula_azul.svg    
+    - assets/images/Acciones/icono_cuadricula.svg
+    - assets/images/Acciones/icono_cuerpo_azul.svg
+    - assets/images/Acciones/icono_cuerpo.png
+    - assets/images/Acciones/icono_pesa_azul.svg
+    - assets/images/Acciones/icono_pesa.svg

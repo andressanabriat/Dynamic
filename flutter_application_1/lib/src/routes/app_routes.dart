@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../views/screens/home_screen.dart';
+import '../views/screens/id_sports_centers_screen.dart';
 import '../views/screens/login_screen.dart';
 import '../views/screens/recover_password_screen.dart';
 import '../views/screens/prior_sign_up_screen.dart';
@@ -12,9 +13,10 @@ class AppRoutes {
   static const String userFilter = '/filter'; 
   static const String sportsCenters = '/centers'; 
   static const String login = '/login';
+  static const String recoverPassword = '/recover';
   static const String priorSignUp = '/priorSignUp';
   static const String signUp = '/signUp';
-  static const String recoverPassword = '/recover';
+  static const String idSportsCenters = '/idSportsCenters';
   static const String home = '/home';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -24,18 +26,28 @@ class AppRoutes {
     switch (settings.name) {
       case userFilter:
         return AppAnimations.createSlideTransition(UserFilterScreen(), backFilter: goingFilter);
+
       case sportsCenters:
         return AppAnimations.createSlideTransition(SportsCentersScreen(), backFilter: goingFilter);
+
       case login:
         return AppAnimations.createSlideTransition(LoginScreen(), backFilter: goingFilter);
-      case priorSignUp:
-        return AppAnimations.createSlideTransition(PriorSignUpScreen(), back: goingBack);
-      case signUp:
-        return AppAnimations.createSlideTransition(SignUpScreen(), back: goingBack);
+
       case recoverPassword:
         return AppAnimations.createSlideTransition(RecoverPasswordScreen(), back: goingBack);
+
+      case priorSignUp:
+        return AppAnimations.createSlideTransition(PriorSignUpScreen(), back: goingBack);
+        
+      case signUp:
+        return AppAnimations.createSlideTransition(SignUpScreen(), back: goingBack);
+
+      case idSportsCenters:
+        return AppAnimations.createSlideTransition(IdSportsCentersScreen(), back: goingBack);
+
       case home:
         return AppAnimations.createSlideTransition(HomeScreen(), back: goingBack);
+
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(

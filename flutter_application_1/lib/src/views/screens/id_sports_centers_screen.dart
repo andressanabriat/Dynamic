@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/shared/themes/colors.dart';
+import '../widgets/custom_text_field.dart';
 import '../widgets/custom_button.dart';
 import '/src/routes/app_routes.dart';
 
-class PriorSignUpScreen extends StatelessWidget {
+class IdSportsCentersScreen extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
@@ -19,7 +20,7 @@ class PriorSignUpScreen extends StatelessWidget {
                 alignment: Alignment.centerLeft, // Alinea completamente a la izquierda
                 child: IconButton(
                   onPressed: () {
-                    Navigator.of(context).pushNamed(AppRoutes.login, arguments: 'back'); 
+                    Navigator.of(context).pushNamed(AppRoutes.signUp, arguments: 'back'); 
                   }, 
                   icon: Image.asset(
                     'assets/images/Acciones/Icono_Atras.png',
@@ -29,12 +30,12 @@ class PriorSignUpScreen extends StatelessWidget {
                 ),
               ),
 
-              SizedBox(height: 250), // Espacio ente botón atras y Restablecer contraseña
+              SizedBox(height: 300), // Espacio ente botón atras y Restablecer contraseña
               
               Padding(
-                padding: const EdgeInsets.only(right: 63), // Espacio desde el borde izquierdo
+                padding: const EdgeInsets.only(right: 2), // Espacio desde el borde izquierdo
                 child: Text(
-                  '¿Comenzamos?',
+                  '¡Ya casi acabamos!',
                   style: TextStyle(
                     fontSize: 40,
                     color: AppColors.mainBlue,
@@ -45,19 +46,33 @@ class PriorSignUpScreen extends StatelessWidget {
               SizedBox(height: 30), // Restablecer contraseña y texto
 
               Text(
-                'Primero, necesito saber un poco sobre ti. Esta información ayudará a crear una experiencia personalizada para cumplir tus objetivos.',
+                'Introduce el ID del centro deportivo donde vas a entrenar.',
                 style: TextStyle(
                   fontSize: 18,
                   color: AppColors.primary,
                 ),
               ),
 
-              SizedBox(height: 298), // Espacio entre texto y Correo electronico
+              SizedBox(height: 18), // Restablecer contraseña y texto
+
+              CustomTextField( // Campo de correo electronico
+                hintText: 'ID',
+                width: 355,  // Ancho del campo
+                height: 55,  // Alto del campo
+                hintStyle: TextStyle(
+                  fontSize: 17, // Tamaño del texto
+                  color: Color.fromARGB(255, 108, 97, 97), // Pendiente de cambiar
+                ),
+                fillColor: Color.fromARGB(128, 186, 178, 178),  // Pendiente de cambiar
+                contentPadding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 25.0),  // Espaciado interno
+              ),
+
+              SizedBox(height: 227), // Espacio entre texto y Correo electronico
 
               CustomButton( // Botón de enviar
-                text: 'Comenzar',
+                text: '¡Empezar!',
                 onPressed: () {
-                  Navigator.pushNamed(context, AppRoutes.signUp); // Navegación 
+                  Navigator.pushNamed(context, AppRoutes.home); // Navegación 
                 },
                 backgroundColor: AppColors.mainBlue, // Color del botón
                 textColor: AppColors.secondary, // Color de texto
