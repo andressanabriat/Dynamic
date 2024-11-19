@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../providers/usuario_provider.dart';
-import '../widgets/custom_button.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter_application_1/shared/themes/colors.dart';
 import '/src/routes/app_routes.dart';
 
