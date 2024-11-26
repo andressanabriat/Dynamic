@@ -49,7 +49,7 @@ class SignUpScreen extends StatelessWidget {
                 child: Text(
                   'Health, Sport & Motivation',
                   style: TextStyle(
-                    fontSize: 12, // Tamaño del texto
+                    fontSize: 12.5, // Tamaño del texto
                     color: AppColors.mainBlue, // Color de texto 
                   ),
                 ),
