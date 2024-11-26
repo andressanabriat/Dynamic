@@ -12,8 +12,9 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return Scaffold(      
-      body: SingleChildScrollView( // scroll
-        child: Padding(
+      body: //SingleChildScrollView( // scroll
+        //child: 
+        Padding(
           padding: const EdgeInsets.fromLTRB(30.0, 24.0, 30.0, 24.0), // Espacio de widget parte izquierda, superior, derecha e inferior
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start, // Centra los elementos verticalmente
@@ -32,7 +33,7 @@ class LoginScreen extends StatelessWidget {
                 ),
               ),
 
-              SizedBox(height: 100), // Espacio ente Inicio de sesión y Correo electronico
+              SizedBox(height: 154), // Espacio ente Inicio de sesión y Correo electronico
 
               Align( // Logo de Dynamic
                 alignment: Alignment.center, // Centra la imagen
@@ -59,13 +60,13 @@ class LoginScreen extends StatelessWidget {
                 child: Text(
                   'Health, Sport & Motivation',
                   style: TextStyle(
-                    fontSize: 12, // Tamaño del texto
+                    fontSize: 12.5, // Tamaño del texto
                     color: AppColors.primary, // Color de texto 
                   ),
                 ),
               ),
 
-              SizedBox(height: 50), // Espacio entre lema y inicio de sesión 
+              SizedBox(height: 70), // Espacio entre lema y inicio de sesión 
               
               Padding(
                 padding: const EdgeInsets.only(right: 176), // Espacio desde el borde izquierdo
@@ -111,7 +112,7 @@ class LoginScreen extends StatelessWidget {
               CustomButton( // Botón de Siguiente
                 text: 'Siguiente',
                 onPressed: () {
-                  Navigator.pushNamed(context, AppRoutes.home); // Navegación 
+                  Navigator.pushNamed(context, AppRoutes.idSportsCenters); // Navegación 
                 },
                 backgroundColor: AppColors.mainBlue, // Color del botón
                 textColor: AppColors.secondary, // Color de texto
@@ -174,7 +175,7 @@ class LoginScreen extends StatelessWidget {
             ],
           ),
         ),
-      ),
-    );
+      );
+    //);
   }
 }

@@ -15,7 +15,7 @@ class UserFilterScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              SizedBox(height: 250), // Espacio entre parte superior y logo
+              SizedBox(height: 380), // Espacio entre parte superior y logo
 
               Align( // Logo de Dynamic
                 alignment: Alignment.center, // Centra la imagen
@@ -42,13 +42,13 @@ class UserFilterScreen extends StatelessWidget {
                 child: Text(
                   'Health, Sport & Motivation',
                   style: TextStyle(
-                    fontSize: 12, // Tamaño del texto
+                    fontSize: 12.5, // Tamaño del texto
                     color: AppColors.primary, // Color de texto 
                   ),
                 ),
               ),
 
-              SizedBox(height: 100), // Espacio entre lema y texto de saludo
+              SizedBox(height: 121), // Espacio entre lema y texto de saludo
 
               Align( // Texto Inicia sesión con
                 alignment: Alignment.center,  // Centra el texto

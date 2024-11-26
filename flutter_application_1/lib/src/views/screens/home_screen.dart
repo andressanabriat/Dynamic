@@ -17,9 +17,9 @@ class _HomeScreenState extends State<HomeScreen> {
   int _currentIndex = 0;
 
   final List<Widget> _screens = [
-    Center(child: Text('Inicio')), // Aquí puedes reemplazarlo con tu contenido real
-    Center(child: Text('Rutinas')),
-    Center(child: Text('Dietas')),
+    Center(child: Text('Rutinas')), 
+    Center(child: Text('Informacion fisica')),
+    Center(child: Text('Ejercicios')),
   ];
 
   @override
@@ -34,7 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
               alignment: Alignment.centerLeft,
               child: IconButton(
                 onPressed: () {
-                  Navigator.of(context).pushNamed(AppRoutes.idSportsCenters, arguments: 'backFilter');
+                  Navigator.of(context).pushNamed(AppRoutes.login, arguments: 'backFilter');
                 },
                 icon: Image.asset(
                   'assets/images/Acciones/Icono_Atras.png',
