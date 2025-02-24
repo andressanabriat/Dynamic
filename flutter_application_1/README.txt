@@ -1,10 +1,10 @@
 Pasos para conectar con el repositorio:
 
 // Copiar el repositorio a tu carpeta local
-1. git clone https://github.com/Isroca23/Proyecto-safa.git
+1. git clone https://github.com/andressanabriat/Dynamic.git
 
 // Moverte a la carpeta del Proyecto
-2. cd Proyecto-safa
+2. cd Flutter Entreno
 
 // Entrar a tu rama de trabajo
 3. git checkout nombredelarama
@@ -25,18 +25,4 @@ Pasos para hacer un commit:
 3. git commit -m "mensaje_del_commit"
 
 // Hacer el push
-4. git push
-
-
-Pasos para abrir en local:
-
-// Instalar npm
-1. npm i
-
-// Ejecutar local
-2. npm run dev
-
-Pasos para actualizar tailwind:
-
-// Build de tailwindailwi
-1. npx tailwind -i ./src/input.css -o ./src/output.css --watch
+4. git push nombredelarama
