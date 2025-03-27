@@ -26,3 +26,13 @@ Pasos para hacer un commit:
 
 // Hacer el push
 4. git push nombredelarama
+
+
+Si no te deja hacer el pull:
+// con esto guardas los cambios que tengas
+1. git stash 
+
+2. git pull origin main
+
+// nos devuelve los cambios que hemos guardado anteriormente
+3. git stash apply

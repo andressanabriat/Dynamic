@@ -21,8 +21,8 @@ class UserFilterScreen extends StatelessWidget {
                 alignment: Alignment.center, // Centra la imagen
                 child: Image.asset(
                   'assets/images/Logos/Logo_Dynamic.png',
-                  width: 100,
-                  height: 100,
+                  width: 110,
+                  height: 110,
                 ),
               ),
 
@@ -48,7 +48,7 @@ class UserFilterScreen extends StatelessWidget {
                 ),
               ),
 
-              SizedBox(height: 121), // Espacio entre lema y texto de saludo
+              SizedBox(height: 100), // Espacio entre lema y texto de saludo
 
               Align( // Texto Inicia sesión con
                 alignment: Alignment.center,  // Centra el texto
