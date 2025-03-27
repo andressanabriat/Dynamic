@@ -39,8 +39,8 @@ class LoginScreen extends StatelessWidget {
                 alignment: Alignment.center, // Centra la imagen
                 child: Image.asset(
                   'assets/images/Logos/Logo_Dynamic.png', 
-                  width: 100, 
-                  height: 100, 
+                  width: 110, 
+                  height: 110, 
                 ),
               ),
 
@@ -126,7 +126,7 @@ class LoginScreen extends StatelessWidget {
                 height: 55, // Altura del botón
               ),
 
-              SizedBox(height: 60), // Espacio botón siguiente y recuperar contraseña
+              SizedBox(height: 50), // Espacio botón siguiente y recuperar contraseña
 
               Align( // Boton recuperar contraseña
                 alignment: Alignment.center, // Centra el texto
