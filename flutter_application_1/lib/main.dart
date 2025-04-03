@@ -4,11 +4,9 @@ import 'src/providers/usuario_provider.dart';
 import 'src/routes/app_routes.dart';
 import 'shared/themes/themes.dart';
 import 'src/views/screens/loading_screen.dart'; 
-
 void main() {
   runApp(MyApp());
 }
-
 class MyApp extends StatelessWidget {
 
   @override
