@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class CustomTextField extends StatelessWidget { // Calse para crear y personalizar campos de texto
+class CustomTextField extends StatelessWidget {
   final String hintText;
   final TextEditingController? controller;
   final TextInputType? keyboardType;
@@ -10,6 +10,8 @@ class CustomTextField extends StatelessWidget { // Calse para crear y personaliz
   final EdgeInsetsGeometry? contentPadding;
   final double? width; 
   final double? height; 
+  final bool autofocus;
+  final FocusNode? focusNode;
 
   CustomTextField({
     required this.hintText,
@@ -21,6 +23,8 @@ class CustomTextField extends StatelessWidget { // Calse para crear y personaliz
     this.contentPadding,
     this.width, 
     this.height, 
+    this.autofocus = false,
+    this.focusNode,
   });
 
   @override
@@ -32,6 +36,16 @@ class CustomTextField extends StatelessWidget { // Calse para crear y personaliz
         controller: controller,
         keyboardType: keyboardType,
         obscureText: obscureText,
+        autofocus: autofocus,
+        focusNode: focusNode,
+        // Desactivamos la barra de herramientas de edición
+        enableInteractiveSelection: false,
+        toolbarOptions: ToolbarOptions(
+          copy: false,
+          cut: false,
+          paste: false,
+          selectAll: false,
+        ),
         decoration: InputDecoration(
           hintText: hintText,
           hintStyle: hintStyle ?? TextStyle(fontSize: 17, color: Colors.grey),
