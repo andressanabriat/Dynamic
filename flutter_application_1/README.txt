@@ -25,7 +25,7 @@ Pasos para hacer un commit:
 3. git commit -m "mensaje_del_commit"
 
 // Hacer el push
-4. git push nombredelarama
+4. git push origin nombredelarama
 
 
 Si no te deja hacer el pull:
