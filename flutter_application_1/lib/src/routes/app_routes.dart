@@ -8,7 +8,7 @@ import '../views/screens/sign_up_screen.dart';
 import '../views/screens/sports_centers_screen.dart';
 import '../views/screens/user_filter_screen.dart';
 import '../views/screens/create_new_routine.dart';
-import '../views/screens/exercises.dart';  // Nueva importación
+import '../views/screens/exercises.dart';  
 import 'package:flutter_application_1/src/utils/animations.dart';
 
 class AppRoutes {
@@ -46,7 +46,7 @@ class AppRoutes {
         return AppAnimations.createSlideTransition(HomeScreen(), back: goingBack);
       case crearRutina:
         return AppAnimations.createSlideTransition(CreateNewRoutine(), back: goingBack);
-      case exercises: // Caso para "Ejercicios"
+      case exercises: 
         return AppAnimations.createSlideTransition(Exercises(), back: goingBack);
       default:
         return MaterialPageRoute(

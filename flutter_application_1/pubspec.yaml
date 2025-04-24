@@ -13,6 +13,8 @@ dependencies:
     sdk: flutter
   intl: ^0.18.0
   flutter_svg: ^1.1.0 
+  video_player: ^2.5.0
+  gif_view: ^1.0.1
 
   english_words: ^4.0.0
   provider: ^6.0.0
@@ -37,3 +39,124 @@ flutter:
     - assets/images/Acciones/icono_cuerpo.png
     - assets/images/Acciones/icono_pesa_azul.svg
     - assets/images/Acciones/icono_pesa.svg
+
+    - assets/images/Musculacion/Frontal.png
+    - assets/images/Musculacion/Hombros.png
+    - assets/images/Musculacion/Biceps.png
+    - assets/images/Musculacion/Oblicuos.png
+    - assets/images/Musculacion/Aductores.png
+    - assets/images/Musculacion/TibiaAnterior.png
+    - assets/images/Musculacion/Pectorales.png
+    - assets/images/Musculacion/Abdomen.png
+    - assets/images/Musculacion/Antebrazo.png
+    - assets/images/Musculacion/Cuadriceps.png
+    - assets/images/Musculacion/CardioF.png
+
+    - assets/images/Musculacion/Trasera.png
+    - assets/images/Musculacion/Triceps.png
+    - assets/images/Musculacion/Lumbares.png
+    - assets/images/Musculacion/Isquiotibiales.png
+    - assets/images/Musculacion/Pantorrillas.png
+    - assets/images/Musculacion/Trapecios.png
+    - assets/images/Musculacion/Dorsales.png
+    - assets/images/Musculacion/Gluteos.png
+    - assets/images/Musculacion/CardioT.png
+
+    # Abdomnes
+    - assets/images/Gifs/Abdomen/abdominalesDeclive.gif
+    - assets/images/Gifs/Abdomen/abdominalesPalanca.gif
+    - assets/images/Gifs/Abdomen/abdominalesPonderadosMancuernas.gif
+
+    # Aductores
+    - assets/images/Gifs/Aductores/aducciónCaderaPalancaSentada.gif
+    - assets/images/Gifs/Aductores/sentadillaSumoMancuernas.gif
+    - assets/images/Gifs/Aductores/smithSumoDeadlift.gif
+
+    # Antebrazo
+    - assets\images\Gifs\Antebrazo\desviacionCubitalMancuernas.gif
+    - assets\images\Gifs\Antebrazo\flexionMartilloMuñecaBancoMancuernas.gif
+    - assets\images\Gifs\Antebrazo\flexionMuñecaBancoMancuernas.gif
+
+    # Bíceps
+    - assets/images/Gifs/Biceps/curlBicepsInclinadoMancuernas.gif
+    - assets/images/Gifs/Biceps/curlBicepsMancuernas.gif
+    - assets/images/Gifs/Biceps/curlMartilloCuerpoCruzadoMancuernas.gif
+
+    # Cardio
+    - assets/images/Gifs/Cardio/bicicletaEstatica.gif
+    - assets/images/Gifs/Cardio/cinta.gif
+    - assets/images/Gifs/Cardio/maquinaEliptica.gif
+
+    # Cuádriceps
+    - assets/images/Gifs/Cuadriceps/extensionPiernasPalanca.gif
+    - assets/images/Gifs/Cuadriceps/prensaPiernasTrineo.gif
+    - assets/images/Gifs/Cuadriceps/sentadillaFrontalSmith.gif
+
+    # Dorsales
+    - assets/images/Gifs/Dorsales/barraInclinadaFila.gif
+    - assets/images/Gifs/Dorsales/dominadasCable.gif
+    - assets/images/Gifs/Dorsales/remoBajoPalanca.gif
+
+    # Gluteos
+    - assets/images/Gifs/Gluteos/hiperextensionInversaSmith.gif
+    - assets/images/Gifs/Gluteos/maquinaHipThrust.gif
+    - assets/images/Gifs/Gluteos/patadaBurroSmith.gif
+
+    # Hombros
+    - assets/images/Gifs/Hombros/elevacionLateralMancuernasSentado.gif
+    - assets/images/Gifs/Hombros/levantamientoFrontalMancuernasDePie.gif
+    - assets/images/Gifs/Hombros/prensaBarraDePie.gif
+
+    # Isquiotibiales
+    - assets/images/Gifs/Isquiotibiales/flexionPalancaDePie.gif
+    - assets/images/Gifs/Isquiotibiales/flexionPalancaSentada.gif
+    - assets/images/Gifs/Isquiotibiales/flexionPosicionPalanca.gif
+
+    # Lumbares
+    - assets/images/Gifs/Lumbares/extensionEspaldaMncuernas.gif
+    - assets/images/Gifs/Lumbares/ironMan.gif
+    - assets/images/Gifs/Lumbares/superman.gif
+
+    # Oblicuos
+    - assets/images/Gifs/Oblicuos/abdominalesBicicleta.gif
+    - assets/images/Gifs/Oblicuos/abdominalesLaterales.gif
+    - assets/images/Gifs/Oblicuos/puenteLateral.gif
+
+    # Pantorrillas
+    - assets/images/Gifs/Pantorrillas/elevacionDePiePalanca.gif
+    - assets/images/Gifs/Pantorrillas/elevacionMancuernas.gif
+    - assets/images/Gifs/Pantorrillas/elevacionPalancaSentada.gif
+
+    # Pectorales
+    - assets/images/Gifs/Pectorales/jerseyMancuernasBanco.gif
+    - assets/images/Gifs/Pectorales/pressBancaBarra.gif
+    - assets/images/Gifs/Pectorales/pressBancaBarraDeclinada.gif
+
+    # Tibia Anterior
+    - assets/images/Gifs/TibiaAnterior/piernasHorizontalTrineo.gif
+
+    # Trapecio
+    - assets/images/Gifs/Trapecio/encogimientoMancuernasDePie.gif
+    - assets/images/Gifs/Trapecio/encogimientooPolea.gif
+    - assets/images/Gifs/Trapecio/remoVerticalPolea.gif
+
+    # Triceps
+    - assets/images/Gifs/Triceps/extensionBarraAcostada.gif
+    - assets/images/Gifs/Triceps/extensionEncimaCabeza.gif
+    - assets/images/Gifs/Triceps/flexionCable.gif
+
+
+
+
+
+
+
+
+
+
+
+    
+
+    
+
+  
