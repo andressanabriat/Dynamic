@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 
 class CustomDropdownButton extends StatefulWidget {
-  final String hintText;  // Texto inicial del dropdown
-  final List<String> items;  // Lista de opciones
-  final String? value;  // Valor seleccionado
-  final ValueChanged<String?> onChanged;  // Acción cuando cambia la selección
-  final Color? backgroundColor;  // Color del fondo
-  final Color? textColor;  // Color del texto
-  final double? fontSize;  // Tamaño de la fuente
-  final EdgeInsetsGeometry? padding;  // Padding del botón
-  final OutlinedBorder? shape;  // Forma del botón
-  final double? elevation;  // Elevación del botón
-  final double? width;  // Ancho del botón
-  final double? height;  // Altura del botón
+  final String hintText;
+  final List<String> items;
+  final String? value;
+  final ValueChanged<String?> onChanged;
+  final Color? backgroundColor;
+  final Color? textColor;
+  final double? fontSize;
+  final EdgeInsetsGeometry? padding;
+  final OutlinedBorder? shape;
+  final double? elevation;
+  final double? width;
+  final double? height;
 
   CustomDropdownButton({
     required this.hintText,
@@ -39,14 +39,13 @@ class _CustomDropdownButtonState extends State<CustomDropdownButton> {
   @override
   void initState() {
     super.initState();
-    _selectedValue = widget.value;  // Inicializar con el valor inicial si está definido
+    _selectedValue = widget.value;
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: widget.width,
-      height: widget.height,
       padding: widget.padding ?? EdgeInsets.symmetric(horizontal: 16),
       decoration: BoxDecoration(
         color: widget.backgroundColor ?? Theme.of(context).primaryColor,
@@ -64,6 +63,9 @@ class _CustomDropdownButtonState extends State<CustomDropdownButton> {
       ),
       child: DropdownButtonHideUnderline(
         child: DropdownButton<String>(
+          isExpanded: true,
+          alignment: AlignmentDirectional.centerStart,
+          menuMaxHeight: 200,
           hint: Text(
             widget.hintText,
             style: TextStyle(
@@ -78,14 +80,22 @@ class _CustomDropdownButtonState extends State<CustomDropdownButton> {
             });
             widget.onChanged(newValue);
           },
+          style: const TextStyle( 
+            color: Colors.black,
+            fontSize: 17,
+          ),
           items: widget.items.map((String item) {
             return DropdownMenuItem<String>(
               value: item,
-              child: Text(
-                item,
-                style: TextStyle(
-                  color: widget.textColor ?? Colors.black,
-                  fontSize: widget.fontSize ?? 18,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 8.0),
+                child: Text(
+                  item,
+                  style: TextStyle(
+                    color: widget.textColor ?? Colors.black,
+                    fontSize: widget.fontSize ?? 18,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
               ),
             );
@@ -94,7 +104,8 @@ class _CustomDropdownButtonState extends State<CustomDropdownButton> {
             Icons.arrow_drop_down,
             color: widget.textColor ?? Colors.white,
           ),
-          dropdownColor: widget.backgroundColor ?? Colors.white,
+          dropdownColor: Colors.white,
+          borderRadius: BorderRadius.circular(8),
         ),
       ),
     );

@@ -5,11 +5,14 @@ import '../views/screens/login_screen.dart';
 import '../views/screens/recover_password_screen.dart';
 import '../views/screens/prior_sign_up_screen.dart';
 import '../views/screens/sign_up_screen.dart';
+import '../views/screens/sign_up_screen_2.dart';
 import '../views/screens/sports_centers_screen.dart';
 import '../views/screens/user_filter_screen.dart';
 import '../views/screens/create_new_routine.dart';
 import '../views/screens/exercises.dart';  
 import 'package:flutter_application_1/src/utils/animations.dart';
+import '../views/screens/sign_up_screen.dart'; // Esto importa la clase Usuario
+
 
 class AppRoutes {
   static const String userFilter = '/filter'; 
@@ -18,10 +21,11 @@ class AppRoutes {
   static const String recoverPassword = '/recover';
   static const String priorSignUp = '/priorSignUp';
   static const String signUp = '/signUp';
+  static const String signUp2 = '/signUp2';
   static const String idSportsCenters = '/idSportsCenters';
   static const String home = '/home';
   static const String crearRutina = '/crearRutina';
-  static const String exercises = '/exercises'; // Nueva ruta
+  static const String exercises = '/exercises';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     final bool goingBack = settings.arguments == 'back'; 
@@ -40,6 +44,9 @@ class AppRoutes {
         return AppAnimations.createSlideTransition(PriorSignUpScreen(), back: goingBack);
       case signUp:
         return AppAnimations.createSlideTransition(SignUpScreen(), back: goingBack);
+      case signUp2:
+        final usuario = settings.arguments as Usuario;
+        return AppAnimations.createSlideTransition(SignUpScreen2(usuario: usuario), back: goingBack);
       case idSportsCenters:
         return AppAnimations.createSlideTransition(IdSportsCentersScreen(), back: goingBack);
       case home:
@@ -52,7 +59,7 @@ class AppRoutes {
         return MaterialPageRoute(
           builder: (_) => Scaffold(
             body: Center(
-              child: Text('Ruta no encontrada: ${settings.name}'),
+              child: Text('Ruta no encontrada: \${settings.name}'),
             ),
           ),
         );

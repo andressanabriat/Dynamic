@@ -19,6 +19,8 @@ dependencies:
   english_words: ^4.0.0
   provider: ^6.0.0
   font_awesome_flutter: ^10.4.0 
+  firebase_core: ^2.32.0
+  cloud_firestore: ^4.8.2
 
 dev_dependencies:
   flutter_test:
@@ -31,6 +33,10 @@ flutter:
 
   assets:
     - assets/images/Logos/Logo_Dynamic.png
+    - assets/images/Logos/Logo_Dynamic_Nombre_Lema.png
+    - assets/images/Logos/Logo_Dynamic_Nombre.png
+    - assets/images/Logos/Nombre_Lema.png
+    - assets/images/Logos/Nombre_Lema_Azul.png
 
     - assets/images/Acciones/Icono_Atras.png
     - assets/images/Acciones/icono_cuadricula_azul.svg    
@@ -73,9 +79,9 @@ flutter:
     - assets/images/Gifs/Aductores/smithSumoDeadlift.gif
 
     # Antebrazo
-    - assets\images\Gifs\Antebrazo\desviacionCubitalMancuernas.gif
-    - assets\images\Gifs\Antebrazo\flexionMartilloMuñecaBancoMancuernas.gif
-    - assets\images\Gifs\Antebrazo\flexionMuñecaBancoMancuernas.gif
+    - assets/images/Gifs/Antebrazo/desviacionCubitalMancuernas.gif
+    - assets/images/Gifs/Antebrazo/flexionMartilloMuñecaBancoMancuernas.gif
+    - assets/images/Gifs/Antebrazo/flexionMuñecaBancoMancuernas.gif
 
     # Bíceps
     - assets/images/Gifs/Biceps/curlBicepsInclinadoMancuernas.gif

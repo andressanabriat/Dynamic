@@ -3,364 +3,250 @@ import 'package:flutter_application_1/shared/themes/colors.dart';
 import '../widgets/custom_button.dart';
 import '../widgets/custom_dropdown_button.dart';
 import '../widgets/custom_date_picker_button.dart';
-import '../widgets/coustom_height_wight_button.dart';
+import '../widgets/scroll_Weight_Picker.dart';
+import '../widgets/custom_Height_Picker.dart';
 import '../widgets/custom_text_field.dart';
 import '/src/routes/app_routes.dart';
+import 'package:intl/intl.dart';
 
-class SignUpScreen extends StatelessWidget {
-  
+class Usuario {
+  String nombre;
+  String apellido1;
+  String apellido2;
+  String genero;
+  String fechaNacimiento;
+  double peso;
+  double altura;
+  String objetivo;
+
+  Usuario({
+    required this.nombre,
+    required this.apellido1,
+    required this.apellido2,
+    required this.genero,
+    required this.fechaNacimiento,
+    required this.peso,
+    required this.altura,
+    required this.objetivo,
+  });
+}
+
+class SignUpScreen extends StatefulWidget {
+  @override
+  State<SignUpScreen> createState() => _SignUpScreenState();
+}
+
+class _SignUpScreenState extends State<SignUpScreen> {
+  final _nombreController = TextEditingController();
+  final _apellido1Controller = TextEditingController();
+  final _apellido2Controller = TextEditingController();
+  String? _genero;
+  String? _fechaNacimiento;
+  double _peso = 80.0;
+  double _altura = 1.70;
+  String? _objetivo;
+
   @override
   Widget build(BuildContext context) {
-
-    return Scaffold(      
-      body: SingleChildScrollView( // scroll
+    return Scaffold(
+      body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(30.0, 24.0, 30.0, 24.0), // Espacio de widget parte izquierda, superior, derecha e inferior
+          padding: const EdgeInsets.fromLTRB(30.0, 24.0, 30.0, 24.0),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.start, // Centra los elementos verticalmente
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Align( // Boton Atras
-                alignment: Alignment.centerLeft, // Alinea completamente a la izquierda
+              Align(
+                alignment: Alignment.centerLeft,
                 child: IconButton(
                   onPressed: () {
-                    Navigator.of(context).pushNamed(AppRoutes.priorSignUp, arguments: 'back'); 
-                  }, 
+                    Navigator.of(context).pushNamed(AppRoutes.priorSignUp, arguments: 'back');
+                  },
                   icon: Image.asset(
                     'assets/images/Acciones/Icono_Atras.png',
-                    width: 30, // Tamaño de la imagen
+                    width: 30,
                     height: 30,
                   ),
                 ),
               ),
-
-              Align( // Titulo Dynamic
-                alignment: Alignment.center, // Centra el texto
-                child: Text(
-                  'Dynamic',
-                  style: TextStyle(
-                    fontSize: 40, // Tamaño del texto
-                    color: AppColors.mainBlue,  // Color de texto 
-                  ),
+              Align(
+                alignment: Alignment.center,
+                child: Image.asset(
+                  'assets/images/Logos/Nombre_Lema_Azul.png',
+                  width: 190,
+                  height: 110,
                 ),
               ),
-
-              Align(  // Lema
-                alignment: Alignment.center, // Centra el texto
-                child: Text(
-                  'Health, Sport & Motivation',
-                  style: TextStyle(
-                    fontSize: 12.5, // Tamaño del texto
-                    color: AppColors.mainBlue, // Color de texto 
-                  ),
-                ),
-              ),
-
-              SizedBox(height: 40), // Espacio entre lema e informacion
-              
               Padding(
-                padding: const EdgeInsets.only(right: 108), // Espacio desde el borde izquierdo
+                padding: const EdgeInsets.only(right: 108),
                 child: Text(
-                  'Completemos la informacion:',
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: AppColors.primary,
-                  ),
+                  'Completa la informacion:',
+                  style: TextStyle(fontSize: 18, color: AppColors.primary),
                 ),
               ),
-
-              SizedBox(height: 15), // Espacio ente informacion y nombre
-
+              SizedBox(height: 15),
               Padding(
-                padding: const EdgeInsets.only(right: 234), // Espacio desde el borde izquierdo
-                child: Text(
-                  'Nombre:',
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: AppColors.primary,
-                  ),
-                ),
+                padding: const EdgeInsets.only(right: 234),
+                child: Text('Nombre:', style: TextStyle(fontSize: 18, color: AppColors.primary)),
               ),
-
-              CustomTextField( // Campo de correo electronico
+              CustomTextField(
+                controller: _nombreController,
                 hintText: 'Nombre',
-                width: 355,  // Ancho del campo
-                height: 55,  // Alto del campo
-                hintStyle: TextStyle(
-                  fontSize: 17, // Tamaño del texto
-                  color: Color.fromARGB(255, 108, 97, 97), // Pendiente de cambiar
-                ),
-                fillColor: Color.fromARGB(128, 186, 178, 178),  // Pendiente de cambiar
-                contentPadding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 25.0),  // Espaciado interno
+                width: 355,
+                height: 55,
+                hintStyle: TextStyle(fontSize: 17, color: Color.fromARGB(255, 108, 97, 97)),
+                fillColor: Color.fromARGB(128, 186, 178, 178),
+                contentPadding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 25.0),
               ),
-
-              SizedBox(height: 15), // Espacio entre nombre y apellido 1
-              
+              SizedBox(height: 15),
               Padding(
-                padding: const EdgeInsets.only(right: 175), // Espacio desde el borde izquierdo
-                child: Text(
-                  'Primer apellido:',
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: AppColors.primary,
-                  ),
-                ),
+                padding: const EdgeInsets.only(right: 175),
+                child: Text('Primer apellido:', style: TextStyle(fontSize: 18, color: AppColors.primary)),
               ),
-
-              CustomTextField( // Campo de correo electronico
+              CustomTextField(
+                controller: _apellido1Controller,
                 hintText: 'Apellido',
-                width: 355,  // Ancho del campo
-                height: 55,  // Alto del campo
-                hintStyle: TextStyle(
-                  fontSize: 17, // Tamaño del texto
-                  color: Color.fromARGB(255, 108, 97, 97), // Pendiente de cambiar
-                ),
-                fillColor: Color.fromARGB(128, 186, 178, 178),  // Pendiente de cambiar
-                contentPadding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 25.0),  // Espaciado interno
+                width: 355,
+                height: 55,
+                hintStyle: TextStyle(fontSize: 17, color: Color.fromARGB(255, 108, 97, 97)),
+                fillColor: Color.fromARGB(128, 186, 178, 178),
+                contentPadding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 25.0),
               ),
-
-              SizedBox(height: 15), // Espacio entre correo apellido 1 y apellido 2
-              
+              SizedBox(height: 15),
               Padding(
-                padding: const EdgeInsets.only(right: 160), // Espacio desde el borde izquierdo
-                child: Text(
-                  'Segundo apellido:',
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: AppColors.primary,
-                  ),
-                ),
+                padding: const EdgeInsets.only(right: 160),
+                child: Text('Segundo apellido:', style: TextStyle(fontSize: 18, color: AppColors.primary)),
               ),
-
-              CustomTextField( // Campo de correo electronico
+              CustomTextField(
+                controller: _apellido2Controller,
                 hintText: 'Apellido',
-                width: 355,  // Ancho del campo
-                height: 55,  // Alto del campo
-                hintStyle: TextStyle(
-                  fontSize: 17, // Tamaño del texto
-                  color: Color.fromARGB(255, 108, 97, 97), // Pendiente de cambiar
-                ),
-                fillColor: Color.fromARGB(128, 186, 178, 178),  // Pendiente de cambiar
-                contentPadding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 25.0),  // Espaciado interno
+                width: 355,
+                height: 55,
+                hintStyle: TextStyle(fontSize: 17, color: Color.fromARGB(255, 108, 97, 97)),
+                fillColor: Color.fromARGB(128, 186, 178, 178),
+                contentPadding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 25.0),
               ),
-
-              SizedBox(height: 15), // Espacio ente informacion y nombre
-
+              SizedBox(height: 15),
               Padding(
-                padding: const EdgeInsets.only(right: 250), // Espacio desde el borde izquierdo
-                child: Text(
-                  'Genero:',
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: AppColors.primary,
-                  ),
-                ),
+                padding: const EdgeInsets.only(right: 250),
+                child: Text('Genero:', style: TextStyle(fontSize: 18, color: AppColors.primary)),
               ),
-
               CustomDropdownButton(
                 hintText: 'Seleccione un género',
                 items: ['Masculino', 'Femenino'],
-                value: null,
-                onChanged: (value) {
-                  print('Seleccionaste: $value');
-                },
-                backgroundColor: Color.fromARGB(128, 186, 178, 178),
-                textColor: Color.fromARGB(255, 108, 97, 97),
+                value: _genero,
+                onChanged: (value) => setState(() => _genero = value!),
+                backgroundColor: Color.fromARGB(128, 212, 203, 203),
+                textColor: Color.fromARGB(255, 84, 77, 77),
                 fontSize: 17,
-                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30.0),
-                ),
-                elevation: 4,
+                padding: EdgeInsets.symmetric(horizontal: 25, vertical: 4),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
+                elevation: 0,
                 width: 355,
                 height: 55,
               ),
-
-              SizedBox(height: 15), // Espacio ente informacion y nombre
-
+              SizedBox(height: 15),
               Padding(
-                padding: const EdgeInsets.only(right: 142), // Espacio desde el borde izquierdo
-                child: Text(
-                  'Fecha de nacimiento:',
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: AppColors.primary,
-                  ),
-                ),
+                padding: const EdgeInsets.only(right: 142),
+                child: Text('Fecha de nacimiento:', style: TextStyle(fontSize: 18, color: AppColors.primary)),
               ),
-
               CustomDatePickerButton(
                 hintText: 'Seleccione su fecha de nacimiento',
-                backgroundColor: Color.fromARGB(128, 186, 178, 178),
-                textColor: AppColors.primary,
+                backgroundColor: Color.fromARGB(128, 172, 164, 164),
+                textColor: Color.fromARGB(255, 84, 77, 77),
                 fontSize: 17,
                 padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30.0),
-                ),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
+                elevation: 0,
+                width: 355,
+                height: 60,
+                onAgeCalculated: (age) {
+                  final birthDate = DateTime.now().subtract(Duration(days: age * 365));
+                    _fechaNacimiento = DateFormat('dd/MM/yyyy').format(birthDate);
+                },
+              ),
+              SizedBox(height: 15),
+              Padding(
+                padding: const EdgeInsets.only(right: 250),
+                child: Text('Peso:', style: TextStyle(fontSize: 18, color: AppColors.primary)),
+              ),
+              DualWeightPickerButton(
+                minValue: 40,
+                maxValue: 150,
+                initialInteger: 80,
+                initialDecimal: 0,
+                onValueChanged: (value) => _peso = value,
+                backgroundColor: Color.fromARGB(128, 172, 164, 164),
+                textColor: Color.fromARGB(255, 108, 97, 97),
+                width: 355,
+                height: 55,
+              ),
+              SizedBox(height: 15),
+              Padding(
+                padding: const EdgeInsets.only(right: 250),
+                child: Text('Altura:', style: TextStyle(fontSize: 18, color: AppColors.primary)),
+              ),
+              CustomHeightPicker(
+                onHeightChanged: (altura) => _altura = altura,
+                backgroundColor: const Color.fromARGB(128, 172, 164, 164),
+                textColor: const Color.fromARGB(255, 167, 153, 153),
+                width: 355,
+                height: 55,
+                valueStyle: TextStyle(fontSize: 17, fontWeight: FontWeight.w600, color: const Color.fromARGB(255, 108, 97, 97)),
+              ),
+              SizedBox(height: 15),
+              Padding(
+                padding: const EdgeInsets.only(right: 137),
+                child: Text('¿Cuál es tu objetivo?', style: TextStyle(fontSize: 18, color: AppColors.primary)),
+              ),
+              CustomDropdownButton(
+                hintText: 'Seleccione su objetivo',
+                items: ['Hipertrofia', 'Definicion muscular', 'Perder peso'],
+                value: _objetivo,
+                onChanged: (value) => setState(() => _objetivo = value!),
+                backgroundColor: Color.fromARGB(128, 212, 203, 203),
+                textColor: Color.fromARGB(255, 84, 77, 77),
+                fontSize: 17,
+                padding: EdgeInsets.symmetric(horizontal: 25, vertical: 4),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
+                elevation: 0,
+                width: 355,
+                height: 55,
+              ),
+              SizedBox(height: 18),
+              CustomButton(
+                text: 'Siguiente',
+                onPressed: () {
+                  if (_nombreController.text.isNotEmpty &&
+                      _apellido1Controller.text.isNotEmpty &&
+                      _apellido2Controller.text.isNotEmpty &&
+                      _genero != null &&
+                      _fechaNacimiento != null &&
+                      _objetivo != null) {
+                    final usuario = Usuario(
+                      nombre: _nombreController.text,
+                      apellido1: _apellido1Controller.text,
+                      apellido2: _apellido2Controller.text,
+                      genero: _genero!,
+                      fechaNacimiento: _fechaNacimiento!,
+                      peso: _peso,
+                      altura: _altura,
+                      objetivo: _objetivo!,
+                    );
+                    Navigator.pushNamed(context, AppRoutes.signUp2, arguments: usuario,);
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('Por favor completa todos los campos.')),
+                    );
+                  }
+                },
+                backgroundColor: AppColors.mainBlue,
+                textColor: AppColors.secondary,
+                fontSize: 17,
+                padding: EdgeInsets.symmetric(horizontal: 80, vertical: 15),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
                 elevation: 4,
                 width: 355,
                 height: 55,
-                onAgeCalculated: (int age) {
-                  print('Edad calculada: $age años');
-                },
-              ),
-
-              SizedBox(height: 15), // Espacio ente informacion y nombre
-
-              Padding(
-                padding: const EdgeInsets.only(right: 250), // Espacio desde el borde izquierdo
-                child: Text(
-                  'Peso:',
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: AppColors.primary,
-                  ),
-                ),
-              ),
-
-              CoustomHeightWightButton(
-                minValue: 40,
-                maxValue: 150,
-                step: 1,
-                initialValue: 70,
-                onValueChanged: (value) {
-                  print("Peso seleccionado: $value kg");
-                },
-                backgroundColor: const Color.fromARGB(128, 186, 178, 178), // Consistente con los demás botones
-                textColor: Colors.blue, // Color del texto y de los íconos
-                width: 355, // Ancho consistente
-                height: 55, // Alto consistente
-                valueStyle: TextStyle(
-                  fontSize: 17,
-                  color: Colors.blue, // Texto en color azul
-                  fontWeight: FontWeight.w600, // Estilo de texto más definido
-                ),
-              ),
-
-              SizedBox(height: 15), // Espacio ente informacion y nombre
-
-              Padding(
-                padding: const EdgeInsets.only(right: 250), // Espacio desde el borde izquierdo
-                child: Text(
-                  'Altura:',
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: AppColors.primary,
-                  ),
-                ),
-              ),
-
-              CoustomHeightWightButton(
-                minValue: 40,
-                maxValue: 150,
-                step: 1,
-                initialValue: 70,
-                onValueChanged: (value) {
-                  print("Peso seleccionado: $value kg");
-                },
-                backgroundColor: const Color.fromARGB(128, 186, 178, 178), // Consistente con los demás botones
-                textColor: Colors.blue, // Color del texto y de los íconos
-                width: 355, // Ancho consistente
-                height: 55, // Alto consistente
-                valueStyle: TextStyle(
-                  fontSize: 17,
-                  color: Colors.blue, // Texto en color azul
-                  fontWeight: FontWeight.w600, // Estilo de texto más definido
-                ),
-              ),
-
-              SizedBox(height: 15), // Espacio entre correo apellido 1 y apellido 2
-              
-              Padding(
-                padding: const EdgeInsets.only(right: 145), // Espacio desde el borde izquierdo
-                child: Text(
-                  'Correo electronico:',
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: AppColors.primary,
-                  ),
-                ),
-              ),
-
-              CustomTextField( // Campo de correo electronico
-                hintText: 'Correo',
-                width: 355,  // Ancho del campo
-                height: 55,  // Alto del campo
-                hintStyle: TextStyle(
-                  fontSize: 17, // Tamaño del texto
-                  color: Color.fromARGB(255, 108, 97, 97), // Pendiente de cambiar
-                ),
-                fillColor: Color.fromARGB(128, 186, 178, 178),  // Pendiente de cambiar
-                contentPadding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 25.0),  // Espaciado interno
-              ),
-
-              SizedBox(height: 15), // Espacio entre correo apellido 1 y apellido 2
-              
-              Padding(
-                padding: const EdgeInsets.only(right: 205), // Espacio desde el borde izquierdo
-                child: Text(
-                  'Contraseña:',
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: AppColors.primary,
-                  ),
-                ),
-              ),
-
-              CustomTextField( // Campo de correo electronico
-                hintText: 'Contraseña',
-                width: 355,  // Ancho del campo
-                height: 55,  // Alto del campo
-                hintStyle: TextStyle(
-                  fontSize: 17, // Tamaño del texto
-                  color: Color.fromARGB(255, 108, 97, 97), // Pendiente de cambiar
-                ),
-                fillColor: Color.fromARGB(128, 186, 178, 178),  // Pendiente de cambiar
-                contentPadding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 25.0),  // Espaciado interno
-              ),
-
-              SizedBox(height: 15), // Espacio entre correo apellido 1 y apellido 2
-              
-              Padding(
-                padding: const EdgeInsets.only(right: 130), // Espacio desde el borde izquierdo
-                child: Text(
-                  'Repita la contraseña:',
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: AppColors.primary,
-                  ),
-                ),
-              ),
-
-              CustomTextField( // Campo de correo electronico
-                hintText: 'Contraseña',
-                width: 355,  // Ancho del campo
-                height: 55,  // Alto del campo
-                hintStyle: TextStyle(
-                  fontSize: 17, // Tamaño del texto
-                  color: Color.fromARGB(255, 108, 97, 97), // Pendiente de cambiar
-                ),
-                fillColor: Color.fromARGB(128, 186, 178, 178),  // Pendiente de cambiar
-                contentPadding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 25.0),  // Espaciado interno
-              ),
-
-              SizedBox(height: 18), // Espacio entre contraseña y boton siguiente
-
-              CustomButton( // Botón de Siguiente
-                text: 'Siguiente',
-                onPressed: () {
-                  Navigator.pushNamed(context, AppRoutes.idSportsCenters); // Navegación 
-                },
-                backgroundColor: AppColors.mainBlue, // Color del botón
-                textColor: AppColors.secondary, // Color de texto
-                fontSize: 17, // Tamaño de fuente
-                padding: EdgeInsets.symmetric(horizontal: 80, vertical: 15),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30.0),
-                ),
-                elevation: 4,
-                width: 355, // Ancho del botón
-                height: 55, // Altura del botón
               ),
             ],
           ),

@@ -44,13 +44,14 @@ class _CustomDatePickerButtonState extends State<CustomDatePickerButton> {
         return Theme(
           data: Theme.of(context).copyWith(
             colorScheme: ColorScheme.light(
-              primary: widget.backgroundColor ?? Colors.blue, // Color del header
-              onPrimary: Colors.white, // Color del texto en el header
-              onSurface: widget.textColor ?? Colors.black, // Color del texto en la lista
+              primary: widget.backgroundColor ?? Colors.blue,
+              onPrimary: Colors.white,
+              onSurface: widget.textColor ?? Colors.black,
             ),
             textButtonTheme: TextButtonThemeData(
               style: TextButton.styleFrom(
-                foregroundColor: widget.backgroundColor ?? Colors.blue, // Color de los botones
+                foregroundColor: Colors.black, // ✅ Color negro para los botones Cancelar/OK
+                textStyle: TextStyle(fontSize: 16), // (opcional) tamaño del texto
               ),
             ),
           ),
