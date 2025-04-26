@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "610391208242",
+    "firebase_url": "https://dynamic-dam-default-rtdb.firebaseio.com",
+    "project_id": "dynamic-dam",
+    "storage_bucket": "dynamic-dam.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:610391208242:android:467e405ae9a2c50347a72b",
+        "android_client_info": {
+          "package_name": "com.example.flutter_application_1"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDqDP759Nnk-1ANecTrRVpkLC_sN7y7le4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

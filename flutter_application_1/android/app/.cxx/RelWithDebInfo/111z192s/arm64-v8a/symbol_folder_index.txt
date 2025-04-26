@@ -1,0 +1,1 @@
+C:\Users\andre\OneDrive\Escritorio\Flutter Entreno\flutter_application_1\build\app\intermediates\cxx\RelWithDebInfo\111z192s\obj\arm64-v8a

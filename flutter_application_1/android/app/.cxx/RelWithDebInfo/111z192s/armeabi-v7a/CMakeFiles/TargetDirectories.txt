@@ -1,0 +1,2 @@
+C:/Users/andre/OneDrive/Escritorio/Flutter Entreno/flutter_application_1/android/app/.cxx/RelWithDebInfo/111z192s/armeabi-v7a/CMakeFiles/edit_cache.dir
+C:/Users/andre/OneDrive/Escritorio/Flutter Entreno/flutter_application_1/android/app/.cxx/RelWithDebInfo/111z192s/armeabi-v7a/CMakeFiles/rebuild_cache.dir

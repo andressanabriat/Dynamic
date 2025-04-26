@@ -20,7 +20,7 @@ class IdSportsCentersScreen extends StatelessWidget {
                 alignment: Alignment.centerLeft, // Alinea completamente a la izquierda
                 child: IconButton(
                   onPressed: () {
-                    Navigator.of(context).pushNamed(AppRoutes.signUp, arguments: 'back'); 
+                    Navigator.of(context).pushNamed(AppRoutes.signUp2, arguments: 'back'); 
                   }, 
                   icon: Image.asset(
                     'assets/images/Acciones/Icono_Atras.png',
