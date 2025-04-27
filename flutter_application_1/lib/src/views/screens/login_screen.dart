@@ -5,6 +5,7 @@ import '../widgets/custom_button.dart';
 import '../widgets/custom_text_field.dart';
 import '/src/routes/app_routes.dart';
 import '../widgets/custom_Password_Field.dart';
+
 class LoginScreen extends StatefulWidget {
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -14,19 +15,32 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
+  bool _isLoading = false; // Para controlar el spinner
+
   Future<void> _iniciarSesion() async {
     final email = _emailController.text.trim();
     final password = _passwordController.text.trim();
 
+    setState(() {
+      _isLoading = true;
+    });
+
     try {
       final query = await FirebaseFirestore.instance
           .collection('clientes')
-          .where('email', isEqualTo: email)
-          .where('contrasena', isEqualTo: password)
+          .where('Email', isEqualTo: email)
+          .where('Contraseña', isEqualTo: password)
           .get();
 
       if (query.docs.isNotEmpty) {
-        Navigator.pushNamed(context, AppRoutes.idSportsCenters);
+        final userDoc = query.docs.first;
+        final udGimnasio = userDoc['UdGimnasio'];
+
+        if (udGimnasio != null && udGimnasio != "false") {
+          Navigator.pushNamed(context, AppRoutes.home);
+        } else {
+          Navigator.pushNamed(context, AppRoutes.idSportsCenters);
+        }
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Credenciales incorrectas')),
@@ -36,6 +50,10 @@ class _LoginScreenState extends State<LoginScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Error al iniciar sesión: $e')),
       );
+    } finally {
+      setState(() {
+        _isLoading = false;
+      });
     }
   }
 
@@ -87,9 +105,7 @@ class _LoginScreenState extends State<LoginScreen> {
               fillColor: Color.fromARGB(128, 186, 178, 178),
               contentPadding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 25.0),
             ),
-
             SizedBox(height: 15),
-
             CustomPasswordField(
               controller: _passwordController,
               hintText: 'Contraseña',
@@ -97,20 +113,21 @@ class _LoginScreenState extends State<LoginScreen> {
               height: 55,
               fontSize: 17,
             ),
-
             SizedBox(height: 18),
-            CustomButton(
-              text: 'Siguiente',
-              onPressed: _iniciarSesion,
-              backgroundColor: AppColors.mainBlue,
-              textColor: AppColors.secondary,
-              fontSize: 17,
-              padding: EdgeInsets.symmetric(horizontal: 80, vertical: 15),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
-              elevation: 4,
-              width: 355,
-              height: 55,
-            ),
+            _isLoading
+                ? CircularProgressIndicator()
+                : CustomButton(
+                    text: 'Siguiente',
+                    onPressed: _iniciarSesion,
+                    backgroundColor: AppColors.mainBlue,
+                    textColor: AppColors.secondary,
+                    fontSize: 17,
+                    padding: EdgeInsets.symmetric(horizontal: 80, vertical: 15),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
+                    elevation: 4,
+                    width: 355,
+                    height: 55,
+                  ),
             SizedBox(height: 50),
             Align(
               alignment: Alignment.center,
