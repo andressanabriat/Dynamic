@@ -1,39 +1,95 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_application_1/shared/themes/colors.dart';
 import '../widgets/custom_button.dart';
 import '../widgets/custom_text_field.dart';
 import '/src/routes/app_routes.dart';
+import '../widgets/email_service.dart';
 
-class RecoverPasswordScreen extends StatelessWidget {
-  
+class RecoverPasswordScreen extends StatefulWidget {
+  @override
+  State<RecoverPasswordScreen> createState() => _RecoverPasswordScreenState();
+}
+
+class _RecoverPasswordScreenState extends State<RecoverPasswordScreen> {
+  final TextEditingController _emailController = TextEditingController();
+  bool _isLoading = false;
+
+  Future<void> _recoverPassword() async {
+    final email = _emailController.text.trim();
+
+    if (email.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Por favor introduce tu correo electrónico.')),
+      );
+      return;
+    }
+
+    setState(() {
+      _isLoading = true;
+    });
+
+    try {
+      // Actualizamos para usar Email en vez de email
+      final query = await FirebaseFirestore.instance
+          .collection('clientes')
+          .where('Email', isEqualTo: email)
+          .get();
+
+      if (query.docs.isEmpty) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Correo no encontrado.')),
+        );
+      } else {
+        final exito = await EmailService.restablecerContrasena(email);
+
+        if (exito) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Te hemos enviado una nueva contraseña temporal a tu correo.')),
+          );
+          Navigator.of(context).pushNamed(AppRoutes.login);
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Error al restablecer la contraseña.')),
+          );
+        }
+      }
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error al recuperar contraseña: $e')),
+      );
+    } finally {
+      setState(() {
+        _isLoading = false;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-
-    return Scaffold(      
-     body: SingleChildScrollView( // scroll
+    return Scaffold(
+      body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(30.0, 24.0, 30.0, 24.0), // Espacio de widget parte izquierda, superior, derecha e inferior
+          padding: const EdgeInsets.fromLTRB(30.0, 24.0, 30.0, 24.0),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.start, // Centra los elementos verticalmente
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Align( // Boton Atras
-                alignment: Alignment.centerLeft, // Alinea completamente a la izquierda
+              Align(
+                alignment: Alignment.centerLeft,
                 child: IconButton(
                   onPressed: () {
-                    Navigator.of(context).pushNamed(AppRoutes.login, arguments: 'back'); 
-                  }, 
+                    Navigator.of(context).pushNamed(AppRoutes.login, arguments: 'back');
+                  },
                   icon: Image.asset(
                     'assets/images/Acciones/Icono_Atras.png',
-                    width: 30, // Tamaño de la imagen
+                    width: 30,
                     height: 30,
                   ),
                 ),
               ),
-
-              SizedBox(height: 250), // Espacio ente botón atras y Restablecer contraseña
-              
+              SizedBox(height: 250),
               Padding(
-                padding: const EdgeInsets.only(right: 6), // Espacio desde el borde izquierdo
+                padding: const EdgeInsets.only(right: 6),
                 child: Text(
                   'Restablecer Contraseña',
                   style: TextStyle(
@@ -42,49 +98,44 @@ class RecoverPasswordScreen extends StatelessWidget {
                   ),
                 ),
               ),
-                
-              SizedBox(height: 30), // Restablecer contraseña y texto
-
+              SizedBox(height: 30),
               Text(
-                'Introdcue tu correo y te enviaremos instrucciones para restablecer tu contraseña.',
+                'Introduce tu correo y te enviaremos instrucciones para restablecer tu contraseña.',
                 style: TextStyle(
                   fontSize: 18,
                   color: AppColors.primary,
                 ),
               ),
-
-              SizedBox(height: 30), // Espacio entre texto y Correo electronico
-
-              CustomTextField( // Campo de correo electronico
+              SizedBox(height: 30),
+              CustomTextField(
+                controller: _emailController,
                 hintText: 'Correo Electrónico',
-                width: 355,  // Ancho del campo
-                height: 55,  // Alto del campo
+                width: 355,
+                height: 55,
                 hintStyle: TextStyle(
-                  fontSize: 17, // Tamaño del texto
-                  color: Color.fromARGB(255, 108, 97, 97), // Pendiente de cambiar
+                  fontSize: 17,
+                  color: Color.fromARGB(255, 108, 97, 97),
                 ),
-                fillColor: Color.fromARGB(128, 186, 178, 178),  // Pendiente de cambiar
-                contentPadding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 25.0),  // Espaciado interno
+                fillColor: Color.fromARGB(128, 186, 178, 178),
+                contentPadding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 25.0),
               ),
-
-              SizedBox(height: 250), // Espacio entre Correo electronico y boton enviar
-
-              CustomButton( // Botón de enviar
-                text: 'Enviar',
-                onPressed: () {
-                  //Navigator.pushNamed(context, AppRoutes.); // Navegación 
-                },
-                backgroundColor: AppColors.mainBlue, // Color del botón
-                textColor: AppColors.secondary, // Color de texto
-                fontSize: 17, // Tamaño de fuente
-                padding: EdgeInsets.symmetric(horizontal: 80, vertical: 15),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30.0),
-                ),
-                elevation: 4,
-                width: 355, // Ancho del botón
-                height: 55, // Altura del botón
-              ),
+              SizedBox(height: 250),
+              _isLoading
+                  ? CircularProgressIndicator()
+                  : CustomButton(
+                      text: 'Enviar',
+                      onPressed: _recoverPassword,
+                      backgroundColor: AppColors.mainBlue,
+                      textColor: AppColors.secondary,
+                      fontSize: 17,
+                      padding: EdgeInsets.symmetric(horizontal: 80, vertical: 15),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30.0),
+                      ),
+                      elevation: 4,
+                      width: 355,
+                      height: 55,
+                    ),
             ],
           ),
         ),

@@ -10,24 +10,26 @@ import '/src/routes/app_routes.dart';
 import 'package:intl/intl.dart';
 
 class Usuario {
-  String nombre;
-  String apellido1;
-  String apellido2;
-  String genero;
-  String fechaNacimiento;
-  double peso;
-  double altura;
-  String objetivo;
+  String Nombre;
+  String Apellido1;
+  String Apellido2;
+  String Genero;
+  String FechaNacimiento;
+  double Peso;
+  double Altura;
+  String Objetivo;
+  double PesoIdeal;
 
   Usuario({
-    required this.nombre,
-    required this.apellido1,
-    required this.apellido2,
-    required this.genero,
-    required this.fechaNacimiento,
-    required this.peso,
-    required this.altura,
-    required this.objetivo,
+    required this.Nombre,
+    required this.Apellido1,
+    required this.Apellido2,
+    required this.Genero,
+    required this.FechaNacimiento,
+    required this.Peso,
+    required this.Altura,
+    required this.Objetivo,
+    required this.PesoIdeal,
   });
 }
 
@@ -45,6 +47,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   double _peso = 80.0;
   double _altura = 1.70;
   String? _objetivo;
+  double _pesoIdeal = 70.0;
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +82,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               Padding(
                 padding: const EdgeInsets.only(right: 108),
                 child: Text(
-                  'Completa la informacion:',
+                  'Completa la información:',
                   style: TextStyle(fontSize: 18, color: AppColors.primary),
                 ),
               ),
@@ -128,7 +131,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               SizedBox(height: 15),
               Padding(
                 padding: const EdgeInsets.only(right: 250),
-                child: Text('Genero:', style: TextStyle(fontSize: 18, color: AppColors.primary)),
+                child: Text('Género:', style: TextStyle(fontSize: 18, color: AppColors.primary)),
               ),
               CustomDropdownButton(
                 hintText: 'Seleccione un género',
@@ -161,7 +164,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 height: 60,
                 onAgeCalculated: (age) {
                   final birthDate = DateTime.now().subtract(Duration(days: age * 365));
-                    _fechaNacimiento = DateFormat('dd/MM/yyyy').format(birthDate);
+                  _fechaNacimiento = DateFormat('dd/MM/yyyy').format(birthDate);
                 },
               ),
               SizedBox(height: 15),
@@ -212,6 +215,22 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 width: 355,
                 height: 55,
               ),
+              SizedBox(height: 15),
+              Padding(
+                padding: const EdgeInsets.only(right: 205),
+                child: Text('Peso Ideal:', style: TextStyle(fontSize: 18, color: AppColors.primary)),
+              ),
+              DualWeightPickerButton(
+                minValue: 40,
+                maxValue: 150,
+                initialInteger: 70,
+                initialDecimal: 0,
+                onValueChanged: (value) => _pesoIdeal = value,
+                backgroundColor: Color.fromARGB(128, 172, 164, 164),
+                textColor: Color.fromARGB(255, 108, 97, 97),
+                width: 355,
+                height: 55,
+              ),
               SizedBox(height: 18),
               CustomButton(
                 text: 'Siguiente',
@@ -223,16 +242,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       _fechaNacimiento != null &&
                       _objetivo != null) {
                     final usuario = Usuario(
-                      nombre: _nombreController.text,
-                      apellido1: _apellido1Controller.text,
-                      apellido2: _apellido2Controller.text,
-                      genero: _genero!,
-                      fechaNacimiento: _fechaNacimiento!,
-                      peso: _peso,
-                      altura: _altura,
-                      objetivo: _objetivo!,
+                      Nombre: _nombreController.text,
+                      Apellido1: _apellido1Controller.text,
+                      Apellido2: _apellido2Controller.text,
+                      Genero: _genero!,
+                      FechaNacimiento: _fechaNacimiento!,
+                      Peso: _peso,
+                      Altura: _altura,
+                      Objetivo: _objetivo!,
+                      PesoIdeal: _pesoIdeal,
                     );
-                    Navigator.pushNamed(context, AppRoutes.signUp2, arguments: usuario,);
+                    Navigator.pushNamed(context, AppRoutes.signUp2, arguments: usuario);
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(content: Text('Por favor completa todos los campos.')),
