@@ -15,7 +15,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
   }
 
   _navigateToFiltro() async {
-    await Future.delayed(Duration(seconds: 5)); // Simula el tiempo de la carga
+    await Future.delayed(Duration(seconds: 5));
     Navigator.pushReplacement(
       context, MaterialPageRoute(builder: (context) => UserFilterScreen()),
     );
@@ -23,34 +23,38 @@ class _LoadingScreenState extends State<LoadingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    
-    return Scaffold(
-      body: SingleChildScrollView( // scroll
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(30.0, 24.0, 30.0, 24.0), // Espacio de widget parte izquierda, superior, derecha e inferior
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start, // Centra los elementos verticalmente
-            children: [
-              SizedBox(height: 380), // Espacio entre parte superior y logo
+    final width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.height;
 
-              Align( // Logo de Dynamic
-                alignment: Alignment.center, // Centra la imagen
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.fromLTRB(
+            width * 0.08,
+            height * 0.03,
+            width * 0.08,
+            height * 0.03,
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              SizedBox(height: height * 0.4),
+              Align(
+                alignment: Alignment.center,
                 child: Image.asset(
-                  'assets/images/Logos/Logo_Dynamic.png', 
-                  width: 100, 
-                  height: 100, 
+                  'assets/images/Logos/Logo_Dynamic.png',
+                  width: width * 0.3,
+                  height: width * 0.3,
                 ),
               ),
-
-              SizedBox(height: 250), // Espacio entre el logo y el texto
-
-              Align( // Texto Incia sesión con
-                alignment: Alignment.center,  // Centra el texto
+              SizedBox(height: height * 0.3),
+              Align(
+                alignment: Alignment.center,
                 child: Text(
                   'Dynamic',
                   style: TextStyle(
-                    fontSize: 40, // Tamaño de fuente de la frase
-                    color: AppColors.primary, // Color de texto
+                    fontSize: 40,
+                    color: AppColors.primary,
                   ),
                 ),
               ),

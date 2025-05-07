@@ -2,8 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/shared/themes/colors.dart';
 import '/src/routes/app_routes.dart';
 import 'package:video_player/video_player.dart';
+import 'mi_cuenta_screen.dart';
 
 class Exercises extends StatefulWidget {
+  final String userEmail;
+  final String inicialNombre;
+  Exercises({required this.userEmail, required this.inicialNombre});
+
   @override
   _ExercisesState createState() => _ExercisesState();
 }
@@ -155,6 +160,11 @@ class _ExercisesState extends State<Exercises> {
 
   late Map<String, VideoPlayerController> _hombrosVideoControllers;
 
+  @override
+  void initState() {
+    super.initState();
+  }
+
   void _toggleView() {
     setState(() {
       _showFrontal = !_showFrontal;
@@ -169,12 +179,22 @@ class _ExercisesState extends State<Exercises> {
       _antebrazoSelected = false;
       _cuadricepsSelected = false;
       _cardioFSelected = false;
+
+      _tricepsSelected = false;
+      _lumbaresSelected = false;
+      _isquitibialesSelected = false;
+      _pantorrillasSelected = false;
+      _trapeciosSelected = false;
+      _dorsalesSelected = false;
+      _gluteosSelected = false;
+      _cardioTSelected = false;
     });
   }
 
 
   @override
   Widget build(BuildContext context) {
+    print("Exercises build: Recibido inicialNombre = ${widget.inicialNombre}, userEmail = ${widget.userEmail}");
     // Frontal
     final String imageAsset = _showFrontal
       ? (_hombrosSelected
@@ -256,26 +276,31 @@ class _ExercisesState extends State<Exercises> {
                     style: TextStyle(
                       fontSize: 32,
                       fontWeight: FontWeight.bold,
-                      color: AppColors.primary,
+                      color: AppColors.mainBlue,
                     ),
                   ),
                   PopupMenuButton<String>(
                     onSelected: (value) {
-                      if (value == "Cerrar sesión") {
+                      if (value == "Mi cuenta") {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => MiCuentaScreen(userEmail: widget.userEmail),
+                          ),
+                        );
+                      } else if (value == "Cerrar sesión") {
                         Navigator.pushReplacementNamed(context, AppRoutes.login);
                       }
                     },
                     itemBuilder: (_) => [
                       PopupMenuItem(value: "Mi cuenta", child: Text("Mi cuenta")),
-                      PopupMenuItem(value: "Ajustes", child: Text("Ajustes")),
-                      PopupMenuItem(
-                          value: "Cerrar sesión", child: Text("Cerrar sesión")),
+                      PopupMenuItem(value: "Cerrar sesión", child: Text("Cerrar sesión")),
                     ],
                     child: CircleAvatar(
                       radius: 20,
                       backgroundColor: AppColors.mainBlue,
                       child: Text(
-                        'U',
+                        widget.inicialNombre,
                         style: TextStyle(
                             color: AppColors.secondary, fontSize: 20),
                       ),
@@ -972,7 +997,7 @@ class _ExercisesState extends State<Exercises> {
 
             SizedBox(height: 10),
 
-            // — Botón “Cambio” —
+            // — Botón "Cambio" —
             Padding(
               padding: const EdgeInsets.fromLTRB(30, 0, 30, 10),
               child: Align(
@@ -994,7 +1019,7 @@ class _ExercisesState extends State<Exercises> {
               ),
             ),
 
-            // justo después del botón “Cambio”
+            // justo después del botón "Cambio"
             if (_sistemaMuscularSelected) 
               Padding(
                 padding: const EdgeInsets.fromLTRB(30, 0, 30, 20),
@@ -1721,7 +1746,7 @@ class _ExercisesState extends State<Exercises> {
                 ),
 
               // — Ejercicios para Cardio —
-              if (_cardioTSelected || _cardioFSelected)
+              if (_cardioTSelected)
                 Padding(
                   padding: const EdgeInsets.fromLTRB(30, 0, 30, 20),
                   child: Column(
@@ -1767,672 +1792,3 @@ class _ExercisesState extends State<Exercises> {
     );
   }
 }
-
-/* // FRONTAL
-                  // **ZONA ORIGINAL DE HOMBROS**
-                  if (_showFrontal)
-                    Positioned(
-                      top: 75,
-                      left: 0,
-                      width: 100,
-                      height: 35,
-                      child: GestureDetector(
-                        behavior: HitTestBehavior.translucent,
-                        onTap: () {
-                          setState(() {
-                            _sistemaMuscularSelected = false;
-                            _hombrosSelected = true;
-                            _bicepsSelected = false;
-                            _oblicuosSelected = false;
-                            _aductoresSelected = false;
-                            _tibiaAnteriorSelected = false;
-                            _pectoralesSelected = false;
-                            _abdomenSelected = false;
-                            _antebrazoSelected = false;
-                            _cuadricepsSelected = false;
-                            _cardioFSelected = false;
-
-                            _tricepsSelected = false;
-                            _lumbaresSelected = false;
-                            _isquitibialesSelected = false;
-                            _pantorrillasSelected = false;
-                            _trapeciosSelected = false;
-                            _dorsalesSelected = false;
-                            _gluteosSelected = false;
-                            _cardioTSelected = false;
-                          });
-                        },
-                        //child: Container(color: const Color.fromARGB(255, 4, 255, 0).withOpacity(0.3)),
-                      ),
-                    ),
-
-                  // **ZONA ORIGINAL DE BÍCEPS**
-                  if (_showFrontal)
-                    Positioned(
-                      top: 147,
-                      left: 0,
-                      width: 100,
-                      height: 35,
-                      child: GestureDetector(
-                        behavior: HitTestBehavior.translucent,
-                        onTap: () {
-                          setState(() {
-                            _sistemaMuscularSelected = false;
-                            _hombrosSelected = false;
-                            _bicepsSelected = true;
-                            _oblicuosSelected = false;
-                            _aductoresSelected = false;
-                            _tibiaAnteriorSelected = false;
-                            _pectoralesSelected = false;
-                            _abdomenSelected = false;
-                            _antebrazoSelected = false;
-                            _cuadricepsSelected = false;
-                            _cardioFSelected = false;
-
-                            _tricepsSelected = false;
-                            _lumbaresSelected = false;
-                            _isquitibialesSelected = false;
-                            _pantorrillasSelected = false;
-                            _trapeciosSelected = false;
-                            _dorsalesSelected = false;
-                            _gluteosSelected = false;
-                            _cardioTSelected = false;
-                          });
-                        },
-                        //child: Container(color: const Color.fromARGB(255, 4, 255, 0).withOpacity(0.3)),
-                      ),
-                    ),
-
-                  // **ZONA ORIGINAL DE OBLICUOS**
-                  if (_showFrontal)
-                    Positioned(
-                      top: 220,
-                      left: 0,
-                      width: 100,
-                      height: 35,
-                      child: GestureDetector(
-                        behavior: HitTestBehavior.translucent,
-                        onTap: () {
-                          setState(() {
-                            _sistemaMuscularSelected = false;
-                            _hombrosSelected = false;
-                            _bicepsSelected = false;
-                            _oblicuosSelected = true;
-                            _aductoresSelected = false;
-                            _tibiaAnteriorSelected = false;
-                            _pectoralesSelected = false;
-                            _abdomenSelected = false;
-                            _antebrazoSelected = false;
-                            _cuadricepsSelected = false;
-                            _cardioFSelected = false;
-
-                            _tricepsSelected = false;
-                            _lumbaresSelected = false;
-                            _isquitibialesSelected = false;
-                            _pantorrillasSelected = false;
-                            _trapeciosSelected = false;
-                            _dorsalesSelected = false;
-                            _gluteosSelected = false;
-                            _cardioTSelected = false;
-                          });
-                        },
-                        //child: Container(color: const Color.fromARGB(255, 4, 255, 0).withOpacity(0.3)),
-                      ),
-                    ),
-
-                    // **ZONA ORIGINAL DE ADUCTORES**
-                    if (_showFrontal)
-                    Positioned(
-                      top: 385,
-                      left: 0,
-                      width: 100,
-                      height: 35,
-                      child: GestureDetector(
-                        behavior: HitTestBehavior.translucent,
-                        onTap: () {
-                          setState(() {
-                            _sistemaMuscularSelected = false;
-                            _hombrosSelected = false;
-                            _bicepsSelected = false;
-                            _oblicuosSelected = false;
-                            _aductoresSelected = true;
-                            _tibiaAnteriorSelected = false;
-                            _pectoralesSelected = false;
-                            _abdomenSelected = false;
-                            _antebrazoSelected = false;
-                            _cuadricepsSelected = false;
-                            _cardioFSelected = false;
-
-                            _tricepsSelected = false;
-                            _lumbaresSelected = false;
-                            _isquitibialesSelected = false;
-                            _pantorrillasSelected = false;
-                            _trapeciosSelected = false;
-                            _dorsalesSelected = false;
-                            _gluteosSelected = false;
-                            _cardioTSelected = false;
-                          });
-                        },
-                        //child: Container(color: const Color.fromARGB(255, 4, 255, 0).withOpacity(0.3)),
-                      ),
-                    ),
-
-                    // **ZONA ORIGINAL DE TIBIA ANTERIOR**
-                    if (_showFrontal)
-                    Positioned(
-                      top: 485,
-                      left: 0,
-                      width: 100,
-                      height: 35,
-                      child: GestureDetector(
-                        behavior: HitTestBehavior.translucent,
-                        onTap: () {
-                          setState(() {
-                            _sistemaMuscularSelected = false;
-                            _hombrosSelected = false;
-                            _bicepsSelected = false;
-                            _oblicuosSelected = false;
-                            _aductoresSelected = false;
-                            _tibiaAnteriorSelected = true;
-                            _pectoralesSelected = false;
-                            _abdomenSelected = false;
-                            _antebrazoSelected = false;
-                            _cuadricepsSelected = false;
-                            _cardioFSelected = false;
-
-                            _tricepsSelected = false;
-                            _lumbaresSelected = false;
-                            _isquitibialesSelected = false;
-                            _pantorrillasSelected = false;
-                            _trapeciosSelected = false;
-                            _dorsalesSelected = false;
-                            _gluteosSelected = false;
-                            _cardioTSelected = false;
-                          });
-                        },
-                        //child: Container(color: const Color.fromARGB(255, 4, 255, 0).withOpacity(0.3)),
-                      ),
-                    ),
-
-                    // **ZONA ORIGINAL DE PECTORALES**
-                    if (_showFrontal)
-                    Positioned(
-                      top: 75,
-                      left: 249,
-                      width: 100,
-                      height: 35,
-                      child: GestureDetector(
-                        behavior: HitTestBehavior.translucent,
-                        onTap: () {
-                          setState(() {
-                            _sistemaMuscularSelected = false;
-                            _hombrosSelected = false;
-                            _bicepsSelected = false;
-                            _oblicuosSelected = false;
-                            _aductoresSelected = false;
-                            _tibiaAnteriorSelected = false;
-                            _pectoralesSelected = true;
-                            _abdomenSelected = false;
-                            _antebrazoSelected = false;
-                            _cuadricepsSelected = false;
-                            _cardioFSelected = false;
-
-                            _tricepsSelected = false;
-                            _lumbaresSelected = false;
-                            _isquitibialesSelected = false;
-                            _pantorrillasSelected = false;
-                            _trapeciosSelected = false;
-                            _dorsalesSelected = false;
-                            _gluteosSelected = false;
-                            _cardioTSelected = false;
-                          });
-                        },
-                        //child: Container(color: const Color.fromARGB(255, 4, 255, 0).withOpacity(0.3)),
-                      ),
-                    ),
-
-                    // **ZONA ORIGINAL DE ABDOMEN**
-                    if (_showFrontal)
-                    Positioned(
-                      top: 153,
-                      left: 249,
-                      width: 100,
-                      height: 35,
-                      child: GestureDetector(
-                        behavior: HitTestBehavior.translucent,
-                        onTap: () {
-                          setState(() {
-                            _sistemaMuscularSelected = false;
-                            _hombrosSelected = false;
-                            _bicepsSelected = false;
-                            _oblicuosSelected = false;
-                            _aductoresSelected = false;
-                            _tibiaAnteriorSelected = false;
-                            _pectoralesSelected = false;
-                            _abdomenSelected = true;
-                            _antebrazoSelected = false;
-                            _cuadricepsSelected = false;
-                            _cardioFSelected = false;
-
-                            _tricepsSelected = false;
-                            _lumbaresSelected = false;
-                            _isquitibialesSelected = false;
-                            _pantorrillasSelected = false;
-                            _trapeciosSelected = false;
-                            _dorsalesSelected = false;
-                            _gluteosSelected = false;
-                            _cardioTSelected = false;
-                          });
-                        },
-                        //child: Container(color: const Color.fromARGB(255, 4, 255, 0).withOpacity(0.3)),
-                      ),
-                    ),
-
-                    // **ZONA ORIGINAL DE ANTEBRAZO**
-                    if (_showFrontal)
-                    Positioned(
-                      top: 353,
-                      left: 249,
-                      width: 100,
-                      height: 35,
-                      child: GestureDetector(
-                        behavior: HitTestBehavior.translucent,
-                        onTap: () {
-                          setState(() {
-                            _sistemaMuscularSelected = false;
-                            _hombrosSelected = false;
-                            _bicepsSelected = false;
-                            _oblicuosSelected = false;
-                            _aductoresSelected = false;
-                            _tibiaAnteriorSelected = false;
-                            _pectoralesSelected = false;
-                            _abdomenSelected = false;
-                            _antebrazoSelected = true;
-                            _cuadricepsSelected = false;
-                            _cardioFSelected = false;
-
-                            _tricepsSelected = false;
-                            _lumbaresSelected = false;
-                            _isquitibialesSelected = false;
-                            _pantorrillasSelected = false;
-                            _trapeciosSelected = false;
-                            _dorsalesSelected = false;
-                            _gluteosSelected = false;
-                            _cardioTSelected = false;
-                          });
-                        },
-                        //child: Container(color: const Color.fromARGB(255, 4, 255, 0).withOpacity(0.3)),
-                      ),
-                    ),
-
-                    // **ZONA ORIGINAL DE CUADRICEPS**
-                    if (_showFrontal)
-                    Positioned(
-                      top: 435,
-                      left: 249,
-                      width: 100,
-                      height: 35,
-                      child: GestureDetector(
-                        behavior: HitTestBehavior.translucent,
-                        onTap: () {
-                          setState(() {
-                            _sistemaMuscularSelected = false;
-                            _hombrosSelected = false;
-                            _bicepsSelected = false;
-                            _oblicuosSelected = false;
-                            _aductoresSelected = false;
-                            _tibiaAnteriorSelected = false;
-                            _pectoralesSelected = false;
-                            _abdomenSelected = false;
-                            _antebrazoSelected = false;
-                            _cuadricepsSelected = true;
-                            _cardioFSelected = false;
-
-                            _tricepsSelected = false;
-                            _lumbaresSelected = false;
-                            _isquitibialesSelected = false;
-                            _pantorrillasSelected = false;
-                            _trapeciosSelected = false;
-                            _dorsalesSelected = false;
-                            _gluteosSelected = false;
-                            _cardioTSelected = false;
-                          });
-                        },
-                        //child: Container(color: const Color.fromARGB(255, 4, 255, 0).withOpacity(0.3)),
-                      ),
-                    ),
-
-                    // **ZONA ORIGINAL DE CARDIO FRONTAL**
-                    if (_showFrontal)
-                    Positioned(
-                      top: 533,
-                      left: 245,
-                      width: 80,
-                      height: 35,
-                      child: GestureDetector(
-                        behavior: HitTestBehavior.translucent,
-                        onTap: () {
-                          setState(() {
-                            _sistemaMuscularSelected = false;
-                            _hombrosSelected = false;
-                            _bicepsSelected = false;
-                            _oblicuosSelected = false;
-                            _aductoresSelected = false;
-                            _tibiaAnteriorSelected = false;
-                            _pectoralesSelected = false;
-                            _abdomenSelected = false;
-                            _antebrazoSelected = false;
-                            _cuadricepsSelected = false;
-                            _cardioFSelected = true;
-
-                            _tricepsSelected = false;
-                            _lumbaresSelected = false;
-                            _isquitibialesSelected = false;
-                            _pantorrillasSelected = false;
-                            _trapeciosSelected = false;
-                            _dorsalesSelected = false;
-                            _gluteosSelected = false;
-                            _cardioTSelected = false;
-                          });
-                        },
-                        //child: Container(color: const Color.fromARGB(255, 4, 255, 0).withOpacity(0.3)),
-                      ),
-                    ),
-
-                    //TRASERA
-                    // **ZONA ORIGINAL DE TRICEPS**
-                    if (!_showFrontal)
-                    Positioned(
-                      top: 113,
-                      left: 0,
-                      width: 100,
-                      height: 35,
-                      child: GestureDetector(
-                        behavior: HitTestBehavior.translucent,
-                        onTap: () {
-                          setState(() {
-                            _sistemaMuscularSelected = false;
-                            _hombrosSelected = false;
-                            _bicepsSelected = false;
-                            _oblicuosSelected = false;
-                            _aductoresSelected = false;
-                            _tibiaAnteriorSelected = false;
-                            _pectoralesSelected = false;
-                            _abdomenSelected = false;
-                            _antebrazoSelected = false;
-                            _cuadricepsSelected = false;
-                            _cardioFSelected = false;
-
-                            _sistemaMuscularSelected = false;
-                            _tricepsSelected = true;
-                            _lumbaresSelected = false;
-                            _isquitibialesSelected = false;
-                            _pantorrillasSelected = false;
-                            _trapeciosSelected = false;
-                            _dorsalesSelected = false;
-                            _gluteosSelected = false;
-                            _cardioTSelected = false;
-                          });
-                        },
-                        //child: Container(color: const Color.fromARGB(255, 4, 255, 0).withOpacity(0.3)),
-                      ),
-                    ),
-
-                    // **ZONA ORIGINAL DE LUMBARES**
-                    if (!_showFrontal)
-                    Positioned(
-                      top: 195,
-                      left: 0,
-                      width: 100,
-                      height: 35,
-                      child: GestureDetector(
-                        behavior: HitTestBehavior.translucent,
-                        onTap: () {
-                          setState(() {
-                            _sistemaMuscularSelected = false;
-                            _hombrosSelected = false;
-                            _bicepsSelected = false;
-                            _oblicuosSelected = false;
-                            _aductoresSelected = false;
-                            _tibiaAnteriorSelected = false;
-                            _pectoralesSelected = false;
-                            _abdomenSelected = false;
-                            _antebrazoSelected = false;
-                            _cuadricepsSelected = false;
-                            _cardioFSelected = false;
-
-                            _tricepsSelected = false;
-                            _lumbaresSelected = true;
-                            _isquitibialesSelected = false;
-                            _pantorrillasSelected = false;
-                            _trapeciosSelected = false;
-                            _dorsalesSelected = false;
-                            _gluteosSelected = false;
-                            _cardioTSelected = false;
-                          });
-                        },
-                        //child: Container(color: const Color.fromARGB(255, 4, 255, 0).withOpacity(0.3)),
-                      ),
-                    ),
-
-                    // **ZONA ORIGINAL DE ISQUIOTIBIALES**
-                    if (!_showFrontal)
-                    Positioned(
-                      top: 375,
-                      left: 0,
-                      width: 100,
-                      height: 35,
-                      child: GestureDetector(
-                        behavior: HitTestBehavior.translucent,
-                        onTap: () {
-                          setState(() {
-                            _sistemaMuscularSelected = false;
-                            _hombrosSelected = false;
-                            _bicepsSelected = false;
-                            _oblicuosSelected = false;
-                            _aductoresSelected = false;
-                            _tibiaAnteriorSelected = false;
-                            _pectoralesSelected = false;
-                            _abdomenSelected = false;
-                            _antebrazoSelected = false;
-                            _cuadricepsSelected = false;
-                            _cardioFSelected = false;
-
-                            _tricepsSelected = false;
-                            _lumbaresSelected = false;
-                            _isquitibialesSelected = true;
-                            _pantorrillasSelected = false;
-                            _trapeciosSelected = false;
-                            _dorsalesSelected = false;
-                            _gluteosSelected = false;
-                            _cardioTSelected = false;
-                          });
-                        },
-                        //child: Container(color: const Color.fromARGB(255, 4, 255, 0).withOpacity(0.3)),
-                      ),
-                    ),
-
-                    // **ZONA ORIGINAL DE PANTORRILLAS**
-                    if (!_showFrontal)
-                    Positioned(
-                      top: 465,
-                      left: 0,
-                      width: 100,
-                      height: 35,
-                      child: GestureDetector(
-                        behavior: HitTestBehavior.translucent,
-                        onTap: () {
-                          setState(() {
-                            _sistemaMuscularSelected = false;
-                            _hombrosSelected = false;
-                            _bicepsSelected = false;
-                            _oblicuosSelected = false;
-                            _aductoresSelected = false;
-                            _tibiaAnteriorSelected = false;
-                            _pectoralesSelected = false;
-                            _abdomenSelected = false;
-                            _antebrazoSelected = false;
-                            _cuadricepsSelected = false;
-                            _cardioFSelected = false;
-
-                            _tricepsSelected = false;
-                            _lumbaresSelected = false;
-                            _isquitibialesSelected = false;
-                            _pantorrillasSelected = true;
-                            _trapeciosSelected = false;
-                            _dorsalesSelected = false;
-                            _gluteosSelected = false;
-                            _cardioTSelected = false;
-                          });
-                        },
-                        //child: Container(color: const Color.fromARGB(255, 4, 255, 0).withOpacity(0.3)),
-                      ),
-                    ),
-
-                    // **ZONA ORIGINAL DE TRAPECIO**
-                    if (!_showFrontal)
-                    Positioned(
-                      top: 110,
-                      left: 250,
-                      width: 100,
-                      height: 35,
-                      child: GestureDetector(
-                        behavior: HitTestBehavior.translucent,
-                        onTap: () {
-                          setState(() {
-                            _sistemaMuscularSelected = false;
-                            _hombrosSelected = false;
-                            _bicepsSelected = false;
-                            _oblicuosSelected = false;
-                            _aductoresSelected = false;
-                            _tibiaAnteriorSelected = false;
-                            _pectoralesSelected = false;
-                            _abdomenSelected = false;
-                            _antebrazoSelected = false;
-                            _cuadricepsSelected = false;
-                            _cardioFSelected = false;
-
-                            _tricepsSelected = false;
-                            _lumbaresSelected = false;
-                            _isquitibialesSelected = false;
-                            _pantorrillasSelected = false;
-                            _trapeciosSelected = true;
-                            _dorsalesSelected = false;
-                            _gluteosSelected = false;
-                            _cardioTSelected = false;
-                          });
-                        },
-                        //child: Container(color: const Color.fromARGB(255, 4, 255, 0).withOpacity(0.3)),
-                      ),
-                    ),
-
-                    // **ZONA ORIGINAL DE DORSALES**
-                    if (!_showFrontal)
-                    Positioned(
-                      top: 183,
-                      left: 250,
-                      width: 100,
-                      height: 35,
-                      child: GestureDetector(
-                        behavior: HitTestBehavior.translucent,
-                        onTap: () {
-                          setState(() {
-                            _sistemaMuscularSelected = false;
-                            _hombrosSelected = false;
-                            _bicepsSelected = false;
-                            _oblicuosSelected = false;
-                            _aductoresSelected = false;
-                            _tibiaAnteriorSelected = false;
-                            _pectoralesSelected = false;
-                            _abdomenSelected = false;
-                            _antebrazoSelected = false;
-                            _cuadricepsSelected = false;
-                            _cardioFSelected = false;
-
-                            _tricepsSelected = false;
-                            _lumbaresSelected = false;
-                            _isquitibialesSelected = false;
-                            _pantorrillasSelected = false;
-                            _trapeciosSelected = false;
-                            _dorsalesSelected = true;
-                            _gluteosSelected = false;
-                            _cardioTSelected = false;
-                          });
-                        },
-                        //child: Container(color: const Color.fromARGB(255, 4, 255, 0).withOpacity(0.3)),
-                      ),
-                    ),
-
-                    // **ZONA ORIGINAL DE GLUTEOS**
-                    if (!_showFrontal)
-                    Positioned(
-                      top: 393,
-                      left: 250,
-                      width: 100,
-                      height: 35,
-                      child: GestureDetector(
-                        behavior: HitTestBehavior.translucent,
-                        onTap: () {
-                          setState(() {
-                            _sistemaMuscularSelected = false;
-                            _hombrosSelected = false;
-                            _bicepsSelected = false;
-                            _oblicuosSelected = false;
-                            _aductoresSelected = false;
-                            _tibiaAnteriorSelected = false;
-                            _pectoralesSelected = false;
-                            _abdomenSelected = false;
-                            _antebrazoSelected = false;
-                            _cuadricepsSelected = false;
-                            _cardioFSelected = false;
-
-                            _tricepsSelected = false;
-                            _lumbaresSelected = false;
-                            _isquitibialesSelected = false;
-                            _pantorrillasSelected = false;
-                            _trapeciosSelected = false;
-                            _dorsalesSelected = false;
-                            _gluteosSelected = true;
-                            _cardioTSelected = false;
-                          });
-                        },
-                        //child: Container(color: const Color.fromARGB(255, 4, 255, 0).withOpacity(0.3)),
-                      ),
-                    ),
-
-                    // **ZONA ORIGINAL DE CARDIO TRASERO**
-                    if (!_showFrontal)
-                    Positioned(
-                      top: 533,
-                      left: 245,
-                      width: 80,
-                      height: 35,
-                      child: GestureDetector(
-                        behavior: HitTestBehavior.translucent,
-                        onTap: () {
-                          setState(() {
-                            _sistemaMuscularSelected = false;
-                            _hombrosSelected = false;
-                            _bicepsSelected = false;
-                            _oblicuosSelected = false;
-                            _aductoresSelected = false;
-                            _tibiaAnteriorSelected = false;
-                            _pectoralesSelected = false;
-                            _abdomenSelected = false;
-                            _antebrazoSelected = false;
-                            _cuadricepsSelected = false;
-                            _cardioFSelected = false;
-
-                            _tricepsSelected = false;
-                            _lumbaresSelected = false;
-                            _isquitibialesSelected = false;
-                            _pantorrillasSelected = false;
-                            _trapeciosSelected = false;
-                            _dorsalesSelected = false;
-                            _gluteosSelected = false;
-                            _cardioTSelected = true;
-                          });
-                        },
-                        //child: Container(color: const Color.fromARGB(255, 4, 255, 0).withOpacity(0.3)),
-                      ),
-                    ),*/

@@ -7,6 +7,7 @@ class CustomHeightPicker extends StatefulWidget {
   final double? width;
   final double? height;
   final TextStyle? valueStyle;
+  final double? initialValue;
   final ValueChanged<double> onHeightChanged;
 
   const CustomHeightPicker({
@@ -16,6 +17,7 @@ class CustomHeightPicker extends StatefulWidget {
     this.width,
     this.height,
     this.valueStyle,
+    this.initialValue,
   });
 
   @override

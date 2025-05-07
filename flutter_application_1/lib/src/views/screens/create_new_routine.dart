@@ -2,8 +2,14 @@ import 'package:flutter/material.dart';
 import '../widgets/custom_button.dart';
 import '../widgets/custom_text_field.dart';
 import 'package:flutter_application_1/shared/themes/colors.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';  
 
 class CreateNewRoutine extends StatefulWidget {
+  final String userEmail;
+
+  CreateNewRoutine({required this.userEmail}); // pasa el email al instanciar
+
   @override
   _CreateNewRoutineState createState() => _CreateNewRoutineState();
 }
@@ -86,6 +92,73 @@ class _CreateNewRoutineState extends State<CreateNewRoutine> {
   @override
   Widget build(BuildContext context) {
     return _showSummary ? _buildSummaryView() : _buildInputView();
+  }
+
+  Future<void> _guardarRutinaEnFirebase() async {
+    try {
+      final String nombreRutina = _routineNameController.text.trim();
+      if (nombreRutina.isEmpty) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Por favor, ingresa el nombre de la rutina')),
+        );
+        return;
+      }
+
+      final List<String> dias = [];
+      final Map<String, dynamic> ejercicios = {};
+
+      for (int i = 0; i < _selectedDays.length; i++) {
+        if (_selectedDays[i] && _routineDetails.containsKey(i)) {
+          final diaNombre = _days[i].toLowerCase();
+          dias.add(diaNombre);
+          final detail = _routineDetails[i]!;
+
+          final List<Map<String, dynamic>> grupos = [];
+          for (var group in detail.groups) {
+            final String musculo = group.muscleController.text.trim();
+            final List<Map<String, dynamic>> ejerciciosGrupo = [];
+
+            for (var row in group.rows) {
+              if (row.exerciseController.text.trim().isEmpty) continue;
+              ejerciciosGrupo.add({
+                'nombre': row.exerciseController.text.trim(),
+                'series': row.seriesCount,
+                'repeticiones': row.repsControllers.map((c) => c.text.trim()).toList(),
+              });
+            }
+
+            if (musculo.isNotEmpty && ejerciciosGrupo.isNotEmpty) {
+              grupos.add({'musculo': musculo, 'ejercicios': ejerciciosGrupo});
+            }
+          }
+
+          if (grupos.isNotEmpty) {
+            ejercicios[diaNombre] = grupos;
+          }
+        }
+      }
+
+      final rutina = {
+        'nombre': nombreRutina,
+        'dias': dias,
+        'ejercicios': ejercicios,
+        'objetivo': _selectedObjective, 
+        'CreadaPorGym': false,
+        'asignados': [widget.userEmail],
+        'gymPassword': "creadaPorApp",
+      };
+
+      await FirebaseFirestore.instance.collection('rutinas').add(rutina);
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Rutina creada exitosamente')),
+      );
+      Navigator.of(context).pop(); // cerrar modal
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error al guardar rutina: $e')),
+      );
+    }
   }
 
   // Vista de entrada
@@ -279,9 +352,7 @@ class _CreateNewRoutineState extends State<CreateNewRoutine> {
             SizedBox(height: 20),
             CustomButton(
               text: 'Crear rutina',
-              onPressed: () {
-                // Acción final (guardar datos, etc.)
-              },
+              onPressed: _guardarRutinaEnFirebase,
               backgroundColor: AppColors.mainBlue,
               textColor: AppColors.secondary,
               fontSize: 17,
@@ -317,7 +388,7 @@ class _CreateNewRoutineState extends State<CreateNewRoutine> {
           textColor: AppColors.secondary,
           fontSize: 14,
           padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
           elevation: 2,
           width: double.infinity,
           height: 40,

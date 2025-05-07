@@ -5,7 +5,7 @@ import '/src/routes/app_routes.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class IdSportsCentersScreen extends StatefulWidget {
-  final String emailUsuario; // ✅ Ahora correctamente recibido por el constructor
+  final String emailUsuario;
 
   const IdSportsCentersScreen({Key? key, required this.emailUsuario}) : super(key: key);
 
@@ -14,7 +14,7 @@ class IdSportsCentersScreen extends StatefulWidget {
 }
 
 class _IdSportsCentersScreenState extends State<IdSportsCentersScreen> {
-  
+
   Future<void> verificarUdGimnasio() async {
     try {
       final snapshot = await FirebaseFirestore.instance
@@ -32,13 +32,12 @@ class _IdSportsCentersScreenState extends State<IdSportsCentersScreen> {
       final datosUsuario = snapshot.docs.first.data();
       final udGimnasio = datosUsuario['UdGimnasio'];
 
-      // 🔥 Aquí corregimos: tratamos UdGimnasio como un String
       if (udGimnasio == null || udGimnasio == "false" || udGimnasio.isEmpty) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Espera a que el administrador te dé de alta.')),
+          SnackBar(content: Text('Espera a que el personal del gimansio te dé de alta.')),
         );
       } else {
-        Navigator.pushNamed(context, AppRoutes.home);
+        Navigator.pushNamed(context, AppRoutes.home, arguments: widget.emailUsuario);
       }
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -49,60 +48,59 @@ class _IdSportsCentersScreenState extends State<IdSportsCentersScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(30.0, 24.0, 30.0, 24.0),
+      resizeToAvoidBottomInset: true,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          padding: EdgeInsets.symmetric(horizontal: screenHeight * 0.04, vertical: screenHeight * 0.03),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Align(
-                alignment: Alignment.centerLeft,
-                child: IconButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  icon: Image.asset(
-                    'assets/images/Acciones/Icono_Atras.png',
-                    width: 30,
-                    height: 30,
-                  ),
+              IconButton(
+                onPressed: () {
+                  Navigator.of(context).pushNamed(AppRoutes.login, arguments: 'backFilter');
+                },
+                icon: Image.asset(
+                  'assets/images/Acciones/Icono_Atras.png',
+                  width: 30,
+                  height: 30,
                 ),
               ),
-              SizedBox(height: 300),
-              Padding(
-                padding: const EdgeInsets.only(right: 2),
-                child: Text(
-                  '¡Ya casi acabamos!',
-                  style: TextStyle(
-                    fontSize: 40,
-                    color: AppColors.mainBlue,
-                  ),
-                ),
-              ),
-              SizedBox(height: 30),
+              SizedBox(height: screenHeight * 0.3),
               Text(
-                'Solicita a tu administrador que te dé acceso a la aplicación.',
+                '¡Ya casi acabamos!',
+                style: TextStyle(
+                  fontSize: 40,
+                  color: AppColors.mainBlue,
+                ),
+              ),
+              SizedBox(height: screenHeight * 0.04),
+              Text(
+                'Solicita al personal de tu gimnasio que te dé acceso a la aplicación.',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 18,
                   color: AppColors.primary,
                 ),
               ),
-              SizedBox(height: 250),
-              CustomButton(
-                text: '¡Empezar!',
-                onPressed: verificarUdGimnasio,
-                backgroundColor: AppColors.mainBlue,
-                textColor: AppColors.secondary,
-                fontSize: 17,
-                padding: EdgeInsets.symmetric(horizontal: 80, vertical: 15),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30.0),
+              SizedBox(height: screenHeight * 0.25),
+              Center(
+                child: CustomButton(
+                  text: '¡Empezar!',
+                  onPressed: verificarUdGimnasio,
+                  backgroundColor: AppColors.mainBlue,
+                  textColor: AppColors.secondary,
+                  fontSize: 17,
+                  padding: EdgeInsets.symmetric(horizontal: 80, vertical: 15),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30.0),
+                  ),
+                  elevation: 4,
+                  width: 355,
+                  height: 55,
                 ),
-                elevation: 4,
-                width: 355,
-                height: 55,
               ),
             ],
           ),

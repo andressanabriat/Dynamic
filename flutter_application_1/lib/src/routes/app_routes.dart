@@ -9,9 +9,9 @@ import '../views/screens/sign_up_screen_2.dart';
 import '../views/screens/sports_centers_screen.dart';
 import '../views/screens/user_filter_screen.dart';
 import '../views/screens/create_new_routine.dart';
+import '../views/screens/tu_Cuerpo_screen.dart';
 import '../views/screens/exercises.dart';
 import 'package:flutter_application_1/src/utils/animations.dart';
-import '../views/screens/sign_up_screen.dart'; // Importa también Usuario
 
 class AppRoutes {
   static const String userFilter = '/filter';
@@ -23,10 +23,13 @@ class AppRoutes {
   static const String signUp2 = '/signUp2';
   static const String idSportsCenters = '/idSportsCenters';
   static const String home = '/home';
+  static const String tuCuerpo = '/tuCuerpo';
   static const String crearRutina = '/crearRutina';
   static const String exercises = '/exercises';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
+    print("generateRoute: name='${settings.name}', arguments='${settings.arguments}' (${settings.arguments?.runtimeType})");
+
     final bool goingBack = settings.arguments == 'back';
     final bool goingFilter = settings.arguments == 'backFilter';
 
@@ -64,13 +67,34 @@ class AppRoutes {
         return _errorRoute();
 
       case home:
-        return AppAnimations.createSlideTransition(HomeScreen(), back: goingBack);
+        if (settings.arguments is String) {
+          final userEmail = settings.arguments as String;
+          return AppAnimations.createSlideTransition(
+            HomeScreen(userEmail: userEmail),
+            back: goingBack,
+          );
+        }
+        return _errorRoute();
 
       case crearRutina:
-        return AppAnimations.createSlideTransition(CreateNewRoutine(), back: goingBack);
+        if (settings.arguments is String) {
+          final userEmail = settings.arguments as String;
+          return AppAnimations.createSlideTransition(
+            CreateNewRoutine(userEmail: userEmail),
+            back: goingBack,
+          );
+        }
+        return _errorRoute();
 
-      case exercises:
-        return AppAnimations.createSlideTransition(Exercises(), back: goingBack);
+      case tuCuerpo:
+        if (settings.arguments is String) {
+          final userEmail = settings.arguments as String;
+          return AppAnimations.createSlideTransition(
+            TuCuerpoScreen(userEmail: userEmail),
+            back: goingBack,
+          );
+        }
+        return _errorRoute();
 
       default:
         return _errorRoute();

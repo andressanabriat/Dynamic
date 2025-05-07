@@ -68,12 +68,14 @@ class _RecoverPasswordScreenState extends State<RecoverPasswordScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true, 
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.fromLTRB(30.0, 24.0, 30.0, 24.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
+              SizedBox(height: 23.5),
               Align(
                 alignment: Alignment.centerLeft,
                 child: IconButton(
@@ -119,7 +121,7 @@ class _RecoverPasswordScreenState extends State<RecoverPasswordScreen> {
                 fillColor: Color.fromARGB(128, 186, 178, 178),
                 contentPadding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 25.0),
               ),
-              SizedBox(height: 250),
+              SizedBox(height: 200),
               _isLoading
                   ? CircularProgressIndicator()
                   : CustomButton(
