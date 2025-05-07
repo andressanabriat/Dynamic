@@ -28,21 +28,21 @@ class CustomBottomNavigationBar extends StatelessWidget {
             width: 24,
             height: 24,
           ),
-          label: 'Entrenamientos',
+          label: '',
         ),
         BottomNavigationBarItem(
           icon: currentIndex == 1
               ? SvgPicture.asset(
                   'assets/images/Acciones/icono_cuerpo_azul.svg',
-                  width: 24,
-                  height: 24,
+                  width: 30,
+                  height: 30,
                 )
               : Image.asset(
                   'assets/images/Acciones/icono_cuerpo.png',
-                  width: 24,
-                  height: 24,
+                  width: 30,
+                  height: 30,
                 ),
-          label: 'Tu cuerpo',
+          label: '',
         ),
         BottomNavigationBarItem(
           icon: SvgPicture.asset(
@@ -52,7 +52,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
             width: 24,
             height: 24,
           ),
-          label: 'Ejercicios',
+          label:'',
         ),
       ],
     );

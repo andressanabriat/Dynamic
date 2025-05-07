@@ -8,10 +8,11 @@ class CustomTextField extends StatelessWidget {
   final Color? fillColor;
   final TextStyle? hintStyle;
   final EdgeInsetsGeometry? contentPadding;
-  final double? width; 
-  final double? height; 
+  final double? width;
+  final double? height;
   final bool autofocus;
   final FocusNode? focusNode;
+  final bool readOnly; // ✅ Nuevo parámetro
 
   CustomTextField({
     required this.hintText,
@@ -21,24 +22,25 @@ class CustomTextField extends StatelessWidget {
     this.fillColor,
     this.hintStyle,
     this.contentPadding,
-    this.width, 
-    this.height, 
+    this.width,
+    this.height,
     this.autofocus = false,
     this.focusNode,
+    this.readOnly = false, // ✅ Valor por defecto
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: width, 
-      height: height, 
+      width: width,
+      height: height,
       child: TextField(
         controller: controller,
         keyboardType: keyboardType,
         obscureText: obscureText,
         autofocus: autofocus,
         focusNode: focusNode,
-        // Desactivamos la barra de herramientas de edición
+        readOnly: readOnly, // ✅ Uso del nuevo parámetro
         enableInteractiveSelection: false,
         toolbarOptions: ToolbarOptions(
           copy: false,

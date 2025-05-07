@@ -15,7 +15,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-  bool _isLoading = false; // Para controlar el spinner
+  bool _isLoading = false;
 
   Future<void> _iniciarSesion() async {
     final email = _emailController.text.trim();
@@ -36,10 +36,10 @@ class _LoginScreenState extends State<LoginScreen> {
         final userDoc = query.docs.first;
         final udGimnasio = userDoc['UdGimnasio'];
 
-        if (udGimnasio != null && udGimnasio != "false") {
-          Navigator.pushNamed(context, AppRoutes.home);
+        if (udGimnasio != null || udGimnasio != "") {
+          Navigator.pushNamed(context, AppRoutes.home, arguments: email);
         } else {
-          Navigator.pushNamed(context, AppRoutes.idSportsCenters);
+          Navigator.pushNamed(context, AppRoutes.idSportsCenters, arguments: email);
         }
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -48,7 +48,7 @@ class _LoginScreenState extends State<LoginScreen> {
       }
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Error al iniciar sesión: $e')),
+        SnackBar(content: Text('Error al iniciar sesión: \$e')),
       );
     } finally {
       setState(() {
@@ -59,91 +59,89 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.height;
+
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.fromLTRB(30.0, 24.0, 30.0, 24.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Align(
-              alignment: Alignment.centerLeft,
-              child: IconButton(
+      resizeToAvoidBottomInset: true,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.fromLTRB(30.0, 24.0, 30.0, 24.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              IconButton(
                 onPressed: () {
                   Navigator.of(context).pushNamed(AppRoutes.userFilter, arguments: 'backFilter');
                 },
                 icon: Image.asset(
                   'assets/images/Acciones/Icono_Atras.png',
-                  width: 30,
-                  height: 30,
+                    width: 30,
+                    height: 30,
                 ),
               ),
-            ),
-            SizedBox(height: 100),
-            Align(
-              alignment: Alignment.center,
-              child: Image.asset(
-                'assets/images/Logos/Logo_Dynamic_Nombre_Lema.png',
-                width: 190,
-                height: 190,
+              SizedBox(height: height * 0.05),
+              Center(
+                child: Image.asset(
+                  'assets/images/Logos/Logo_Dynamic_Nombre_Lema.png',
+                  width: width * 0.5,
+                  height: width * 0.5,
+                ),
               ),
-            ),
-            SizedBox(height: 70),
-            Padding(
-              padding: const EdgeInsets.only(right: 176),
-              child: Text(
-                'Inicio de Sesión',
-                style: TextStyle(fontSize: 18, color: AppColors.primary),
-              ),
-            ),
-            SizedBox(height: 15),
-            CustomTextField(
-              controller: _emailController,
-              hintText: 'Correo Electrónico',
-              width: 355,
-              height: 55,
-              hintStyle: TextStyle(fontSize: 17, color: Color.fromARGB(255, 108, 97, 97)),
-              fillColor: Color.fromARGB(128, 186, 178, 178),
-              contentPadding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 25.0),
-            ),
-            SizedBox(height: 15),
-            CustomPasswordField(
-              controller: _passwordController,
-              hintText: 'Contraseña',
-              width: 355,
-              height: 55,
-              fontSize: 17,
-            ),
-            SizedBox(height: 18),
-            _isLoading
-                ? CircularProgressIndicator()
-                : CustomButton(
-                    text: 'Siguiente',
-                    onPressed: _iniciarSesion,
-                    backgroundColor: AppColors.mainBlue,
-                    textColor: AppColors.secondary,
-                    fontSize: 17,
-                    padding: EdgeInsets.symmetric(horizontal: 80, vertical: 15),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
-                    elevation: 4,
-                    width: 355,
-                    height: 55,
-                  ),
-            SizedBox(height: 50),
-            Align(
-              alignment: Alignment.center,
-              child: TextButton(
-                onPressed: () {
-                  Navigator.of(context).pushNamed(AppRoutes.recoverPassword);
-                },
+              SizedBox(height: height * 0.05),
+              Padding(
+                padding: EdgeInsets.only(right: width * 0.4),
                 child: Text(
-                  '¿Has olvidado tu contraseña?',
-                  style: TextStyle(fontSize: 18, color: AppColors.mainBlue),
+                  'Inicio de Sesión',
+                  style: TextStyle(fontSize: 18, color: AppColors.primary, fontWeight: FontWeight.bold),
                 ),
               ),
-            ),
-            Align(
-              alignment: Alignment.center,
-              child: Row(
+              SizedBox(height: height * 0.02),
+              CustomTextField(
+                controller: _emailController,
+                hintText: 'Correo Electrónico',
+                width: double.infinity,
+                height: 55,
+                hintStyle: TextStyle(fontSize: 17, color: Color.fromARGB(255, 108, 97, 97)),
+                fillColor: Color.fromARGB(128, 186, 178, 178),
+                contentPadding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 25.0),
+              ),
+              SizedBox(height: height * 0.015),
+              CustomPasswordField(
+                controller: _passwordController,
+                hintText: 'Contraseña',
+                width: double.infinity,
+                height: 55,
+                fontSize: 17,
+              ),
+              SizedBox(height: height * 0.02),
+              _isLoading
+                  ? Center(child: CircularProgressIndicator())
+                  : CustomButton(
+                      text: 'Siguiente',
+                      onPressed: _iniciarSesion,
+                      backgroundColor: AppColors.mainBlue,
+                      textColor: AppColors.secondary,
+                      fontSize: 17,
+                      padding: EdgeInsets.symmetric(horizontal: width * 0.2, vertical: 15),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
+                      elevation: 4,
+                      width: double.infinity,
+                      height: 55,
+                    ),
+              SizedBox(height: height * 0.03),
+              Center(
+                child: TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pushNamed(AppRoutes.recoverPassword);
+                  },
+                  child: Text(
+                    '¿Has olvidado tu contraseña?',
+                    style: TextStyle(fontSize: 18, color: AppColors.mainBlue),
+                  ),
+                ),
+              ),
+              Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
@@ -161,8 +159,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ],
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
